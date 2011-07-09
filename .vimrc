@@ -64,7 +64,7 @@ autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
 " colorscheme
-colorscheme desert
+colorscheme doorhinge
 
 " get rid of the silly characters in window separators
 set fillchars=""
