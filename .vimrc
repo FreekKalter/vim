@@ -1,4 +1,5 @@
 " author: Freek Kalter
+" based on Derek Wyats original vimrc (and awsome videos)
 
 " Forget being compatible with good ol' vi
 set nocompatible
