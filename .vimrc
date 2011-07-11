@@ -1,6 +1,9 @@
 " author: Freek Kalter
 " based on Derek Wyats original vimrc (and awsome videos)
 
+" start with maximazed window
+au GUIEnter * simalt ~m
+
 " Forget being compatible with good ol' vi
 set nocompatible
 
