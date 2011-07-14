@@ -15,6 +15,9 @@ filetype indent on
 " Turn on that syntax highlighting
 syntax on
 
+" set lettertype
+set guifont=inconsolata:h11 
+
 " Why is this not a default
 set hidden
 
