@@ -8,6 +8,9 @@ elseif has("win32")
    au GUIEnter * simalt ~m
 endif 
 
+" set font
+set guifont=inconsolata:h11 
+
 " Forget being compatible with good ol' vi
 set nocompatible
 
@@ -18,9 +21,6 @@ filetype indent on
 
 " Turn on that syntax highlighting
 syntax on
-
-" set lettertype
-set guifont=inconsolata:h11 
 
 " Why is this not a default
 set hidden
