@@ -1,15 +1,18 @@
 " author: Freek Kalter
 " based on Derek Wyats original vimrc (and awsome videos)
 
+" colorscheme
+"colorscheme doorhinge
+colorscheme wombat
+" set font
+set guifont=inconsolata:h11 
+
 " start with maximazed window
 if has("unix")
 
 elseif has("win32")
    au GUIEnter * simalt ~m
 endif 
-
-" set font
-set guifont=inconsolata:h11 
 
 " Forget being compatible with good ol' vi
 set nocompatible
@@ -73,9 +76,6 @@ set virtualedit=all
 
 autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-
-" colorscheme
-colorscheme doorhinge
 
 " get rid of the silly characters in window separators
 set fillchars=""
