@@ -2,7 +2,11 @@
 " based on Derek Wyats original vimrc (and awsome videos)
 
 " start with maximazed window
-au GUIEnter * simalt ~m
+if has("unix")
+
+elseif has("win32")
+   au GUIEnter * simalt ~m
+endif 
 
 " Forget being compatible with good ol' vi
 set nocompatible
