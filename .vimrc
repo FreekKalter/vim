@@ -19,17 +19,21 @@ set nocompatible
 
 " Get that filetype stuff happening
 filetype on
-filetype plugin on
-filetype indent on
 
 " Turn on that syntax highlighting
 syntax on
+"add html highligting for .tt (dancer template files)
+au BufNewFile,BufRead *.tt set filetype=html
+
+filetype plugin on
+filetype indent on
 
 " Why is this not a default
 set hidden
 
 " higlight search pattern
 set hlsearch
+
 
 " Incrementally match the search
 set incsearch
@@ -122,4 +126,11 @@ noremap <silent> <C-9> <C-W>+
 noremap <silent> <C-0> <C-W>>
 :nmap ,:leftabove vert sbn<CR>
 :nmap ,:rightbelow vert sbn<CR>
+
+"remove higlight on space in normal mode
+nmap <SPACE> <SPACE>:noh<CR>
+
+let mapleader = ","
+nmap <leader>ne :NERDTree<cr>
+let NERDTreeShowBookmarks=1
 
