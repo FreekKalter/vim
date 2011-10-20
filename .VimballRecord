@@ -1,0 +1,2 @@
+netrw.vba: call delete('C:\Users\Gebruiker\vimfiles/plugin/netrwPlugin.vim')|call delete('C:\Users\Gebruiker\vimfiles/autoload/netrw.vim')|call delete('C:\Users\Gebruiker\vimfiles/autoload/netrwFileHandlers.vim')|call delete('C:\Users\Gebruiker\vimfiles/autoload/netrwSettings.vim')|call delete('C:\Users\Gebruiker\vimfiles/doc/pi_netrw.txt')|call delete('C:\Users\Gebruiker\vimfiles/syntax/netrw.vim')
+supertab.vba: call delete('C:\Users\Gebruiker\vimfiles/doc/supertab.txt')|call delete('C:\Users\Gebruiker\vimfiles/plugin/supertab.vim')

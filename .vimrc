@@ -3,14 +3,12 @@
 
 " colorscheme
 "colorscheme doorhinge
-colorscheme wombat
+colorscheme doorhinge
 " set font
-set guifont=inconsolata:h11 
+set guifont=inconsolata:h9 
 
 " start with maximazed window
-if has("unix")
-
-elseif has("win32")
+if has("win32")
    au GUIEnter * simalt ~m
 endif 
 
@@ -19,11 +17,14 @@ set nocompatible
 
 " Get that filetype stuff happening
 filetype on
+set complete-=i
+"set ofu=syntaxcomplete#Complete
 
 " Turn on that syntax highlighting
 syntax on
 "add html highligting for .tt (dancer template files)
 au BufNewFile,BufRead *.tt set filetype=html
+au BufNewFile,BufRead *.less set filetype=css
 
 filetype plugin on
 filetype indent on
