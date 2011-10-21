@@ -1,6 +1,6 @@
 " fugitive.vim - A Git wrapper so awesome, it should be illegal
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Version:      1.1
+" Version:      1.2
 " GetLatestVimScripts: 2975 1 :AutoInstall: fugitive.vim
 
 if exists('g:loaded_fugitive') || &cp
@@ -592,8 +592,9 @@ function! s:StageToggle(lnum1,lnum2) abort
     let output = ''
     for lnum in range(a:lnum1,a:lnum2)
       let line = getline(lnum)
+      let repo = s:repo()
       if line ==# '# Changes to be committed:'
-        call s:repo().git_chomp_in_tree('reset','-q')
+        call repo.git_chomp_in_tree('reset','-q')
         silent! edit!
         1
         if !search('^# Untracked files:$','W')
@@ -601,7 +602,7 @@ function! s:StageToggle(lnum1,lnum2) abort
         endif
         return ''
       elseif line =~# '^# Change\%(d but not updated\|s not staged for commit\):$'
-        call s:repo().git_chomp_in_tree('add','-u')
+        call repo.git_chomp_in_tree('add','-u')
         silent! edit!
         1
         if !search('^# Untracked files:$','W')
@@ -610,7 +611,7 @@ function! s:StageToggle(lnum1,lnum2) abort
         return ''
       elseif line ==# '# Untracked files:'
         " Work around Vim parser idiosyncrasy
-        let discarded = s:repo().git_chomp_in_tree('add','-N','.')
+        call repo.git_chomp_in_tree('add','-N','.')
         silent! edit!
         1
         if !search('^# Change\%(d but not updated\|s not staged for commit\):$','W')
@@ -618,7 +619,7 @@ function! s:StageToggle(lnum1,lnum2) abort
         endif
         return ''
       endif
-      let filename = matchstr(line,'^#\t\%([[:alpha:] ]\+: *\)\=\zs.\{-\}\ze\%( (new commits)\)\=$')
+      let filename = matchstr(line,'^#\t\%([[:alpha:] ]\+: *\)\=\zs.\{-\}\ze\%( (\a\+ [[:alpha:], ]\+)\)\=$')
       if filename ==# ''
         continue
       endif
@@ -637,7 +638,7 @@ function! s:StageToggle(lnum1,lnum2) abort
       else
         let cmd = ['add','--',filename]
       endif
-      let output .= call(s:repo().git_chomp_in_tree,cmd,s:repo())."\n"
+      let output .= call(repo.git_chomp_in_tree,cmd,s:repo())."\n"
     endfor
     if exists('first_filename')
       let jump = first_filename
@@ -1204,9 +1205,9 @@ function! s:Move(force,destination)
   call fugitive#reload_status()
   if s:buffer().commit() == ''
     if isdirectory(destination)
-      return 'keepalt edit '.s:fnameescape(destination)
+      return 'edit '.s:fnameescape(destination)
     else
-      return 'keepalt saveas! '.s:fnameescape(destination)
+      return 'saveas! '.s:fnameescape(destination)
     endif
   else
     return 'file '.s:fnameescape(s:repo().translate(':0:'.destination)
