@@ -1,11 +1,18 @@
 " author: Freek Kalter
 " based on Derek Wyats original vimrc (and awsome videos)
 
+" call pathogen to mangage runtime paths
+call pathogen#infect()
+
+" Turn on that syntax highlighting
+syntax on
+
 " colorscheme
-"colorscheme doorhinge
-colorscheme doorhinge
+set background=dark
+colorscheme solarized
+
 " set font
-set guifont=inconsolata:h9 
+set guifont=inconsolata:h11 
 
 " start with maximazed window
 if has("win32")
@@ -20,8 +27,6 @@ filetype on
 set complete-=i
 "set ofu=syntaxcomplete#Complete
 
-" Turn on that syntax highlighting
-syntax on
 "add html highligting for .tt (dancer template files)
 au BufNewFile,BufRead *.tt set filetype=html
 au BufNewFile,BufRead *.less set filetype=css
