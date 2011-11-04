@@ -12,7 +12,7 @@ set background=dark
 colorscheme solarized
 
 " set font
-set guifont=inconsolata:h11 
+set guifont=inconsolata:h9 
 
 " start with maximazed window
 if has("win32")
@@ -40,6 +40,8 @@ set hidden
 " higlight search pattern
 set hlsearch
 
+" set temp directory to create swap files, windows needs this
+set directory+=,~/tmp,$TMP
 
 " Incrementally match the search
 set incsearch
