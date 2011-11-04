@@ -87,6 +87,10 @@ set virtualedit=all
 autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
+" clear buffers created by fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+
 " get rid of the silly characters in window separators
 set fillchars=""
 
@@ -97,7 +101,7 @@ let loaded_showmarks = 1
 set wildmenu
 
 " Set the status line the way i like it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
+set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
