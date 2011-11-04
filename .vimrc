@@ -12,11 +12,12 @@ set background=dark
 colorscheme solarized
 
 " set font
-set guifont=inconsolata:h9 
+set guifont=inconsolata:h11 
 
 " start with maximazed window
 if has("win32")
    au GUIEnter * simalt ~m
+   set guifont=inconsolata:h9 
 endif 
 
 " Forget being compatible with good ol' vi
