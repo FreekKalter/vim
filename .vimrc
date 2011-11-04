@@ -144,6 +144,6 @@ noremap <silent> <C-0> <C-W>>
 nmap <SPACE> <SPACE>:noh<CR>
 
 let mapleader = ","
-nmap <leader>ne :NERDTree<cr>
+nmap <leader>ne :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1
 
