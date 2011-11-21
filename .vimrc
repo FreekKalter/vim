@@ -26,7 +26,10 @@ set nocompatible
 " Get that filetype stuff happening
 filetype on
 set complete-=i
-"set ofu=syntaxcomplete#Complete
+
+"NERDTree options
+"let loaded_nerd_tree=1
+"let NERDTreeQuitOnOpen=1
 
 "add html highligting for .tt (dancer template files)
 au BufNewFile,BufRead *.tt set filetype=html
