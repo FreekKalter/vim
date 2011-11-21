@@ -9,7 +9,11 @@ syntax on
 
 " colorscheme
 set background=dark
-colorscheme solarized
+if has('gui_running')
+   colorscheme solarized
+else
+   colorscheme summerfruit256 
+endif
 
 " set font
 set guifont=inconsolata:h11 
