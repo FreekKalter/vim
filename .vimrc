@@ -1,6 +1,9 @@
 " author: Freek Kalter
 " based on Derek Wyats original vimrc (and awsome videos)
 
+" Forget being compatible with good ol' vi
+set nocompatible
+
 " call pathogen to mangage runtime paths
 call pathogen#infect()
 
@@ -10,13 +13,18 @@ syntax on
 " colorscheme
 set background=dark
 if has('gui_running')
+
    colorscheme solarized
 else
    colorscheme summerfruit256 
 endif
 
 " set font
-set guifont=inconsolata:h11 
+if has("gui_gtk2")
+   set guifont=inconsolata\ 11
+else
+   set guifont=inconsolata:h11
+endif
 
 " start with maximazed window
 if has("win32")
@@ -24,8 +32,6 @@ if has("win32")
    set guifont=inconsolata:h9 
 endif 
 
-" Forget being compatible with good ol' vi
-set nocompatible
 
 " Get that filetype stuff happening
 filetype on
