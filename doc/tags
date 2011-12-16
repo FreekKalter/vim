@@ -113,6 +113,17 @@ ShowMarksClearMark	showmarks.txt	/*ShowMarksClearMark*
 ShowMarksOn	showmarks.txt	/*ShowMarksOn*
 ShowMarksPlaceMark	showmarks.txt	/*ShowMarksPlaceMark*
 ShowMarksToggle	showmarks.txt	/*ShowMarksToggle*
+SudoEdit	SudoEdit.txt	/*SudoEdit*
+SudoEdit-config	SudoEdit.txt	/*SudoEdit-config*
+SudoEdit-contents	SudoEdit.txt	/*SudoEdit-contents*
+SudoEdit-copyright	SudoEdit.txt	/*SudoEdit-copyright*
+SudoEdit-debug	SudoEdit.txt	/*SudoEdit-debug*
+SudoEdit-faq	SudoEdit.txt	/*SudoEdit-faq*
+SudoEdit-history	SudoEdit.txt	/*SudoEdit-history*
+SudoEdit-manual	SudoEdit.txt	/*SudoEdit-manual*
+SudoEdit.txt	SudoEdit.txt	/*SudoEdit.txt*
+SudoRead	SudoEdit.txt	/*SudoRead*
+SudoWrite	SudoEdit.txt	/*SudoWrite*
 b:netrw_lastfile	pi_netrw.txt	/*b:netrw_lastfile*
 cs	surround.txt	/*cs*
 dav	pi_netrw.txt	/*dav*
@@ -247,6 +258,8 @@ g:netrw_use_nt_rcp	pi_netrw.txt	/*g:netrw_use_nt_rcp*
 g:netrw_win95ftp	pi_netrw.txt	/*g:netrw_win95ftp*
 g:netrw_winsize	pi_netrw.txt	/*g:netrw_winsize*
 g:netrw_xstrlen	pi_netrw.txt	/*g:netrw_xstrlen*
+g:sudoAuth	SudoEdit.txt	/*g:sudoAuth*
+g:sudoAuthArg	SudoEdit.txt	/*g:sudoAuthArg*
 global_markfilelist	pi_netrw.txt	/*global_markfilelist*
 http	pi_netrw.txt	/*http*
 i_CTRL-G_S	surround.txt	/*i_CTRL-G_S*
