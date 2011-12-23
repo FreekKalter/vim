@@ -21,7 +21,7 @@ endif
 
 " set font
 if has("gui_gtk2")
-   set guifont=inconsolata\ 11
+   set guifont=inconsolata\ 10
 else
    set guifont=inconsolata:h11
 endif
