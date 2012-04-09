@@ -159,4 +159,5 @@ nmap <SPACE> <SPACE>:noh<CR>
 let mapleader = ","
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1
-
+"NERDTREE file filters
+let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
