@@ -13,24 +13,21 @@ syntax on
 " colorscheme
 set background=dark
 if has('gui_running')
+   colorscheme molokai
 
-   colorscheme solarized
+   " set font
+   if has("gui_gtk2")
+      set guifont=Envy\ Code\ R\ 10
+   elseif has("win32")
+      au GUIEnter * simalt ~m
+      set guifont=Envy\ Code\ R:h10 
+   elseif
+      set guifont=inconsolata:h10
+   endif
 else
-   colorscheme summerfruit256 
+   "colorscheme summerfruit256 
 endif
 
-" set font
-if has("gui_gtk2")
-   set guifont=inconsolata\ 10
-else
-   set guifont=inconsolata:h11
-endif
-
-" start with maximazed window
-if has("win32")
-   au GUIEnter * simalt ~m
-   set guifont=inconsolata:h9 
-endif 
 
 
 " Get that filetype stuff happening
@@ -44,6 +41,7 @@ set complete-=i
 "add html highligting for .tt (dancer template files)
 au BufNewFile,BufRead *.tt set filetype=html
 au BufNewFile,BufRead *.less set filetype=css
+au BufNewFile,BufRead *.pl.tdy set filetype=perl
 
 filetype plugin on
 filetype indent on
