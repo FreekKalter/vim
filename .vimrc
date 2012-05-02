@@ -13,25 +13,20 @@ syntax on
 " colorscheme
 set background=dark
 if has('gui_running')
+   colorscheme molokai
 
-   colorscheme solarized
+   " set font
+   if has("gui_gtk2")
+      set guifont=Envy\ Code\ R\ 10
+   elseif has("win32")
+      au GUIEnter * simalt ~m
+      set guifont=Envy\ Code\ R:h10 
+   elseif has('mac')
+      set guifont=Envy\ Code\ R:h13,\ inconsolata:h13
+   endif
 else
-   colorscheme summerfruit256 
+   "set terminal font
 endif
-
-" set font
-if has("gui_gtk2")
-   set guifont=inconsolata\ 10
-else
-   set guifont=inconsolata:h11
-endif
-
-" start with maximazed window
-if has("win32")
-   au GUIEnter * simalt ~m
-   set guifont=inconsolata:h9 
-endif 
-
 
 " Get that filetype stuff happening
 filetype on
@@ -40,10 +35,6 @@ set complete-=i
 "NERDTree options
 "let loaded_nerd_tree=1
 "let NERDTreeQuitOnOpen=1
-
-"add html highligting for .tt (dancer template files)
-au BufNewFile,BufRead *.tt set filetype=html
-au BufNewFile,BufRead *.less set filetype=css
 
 filetype plugin on
 filetype indent on
@@ -99,19 +90,19 @@ set vb
 set virtualedit=all
 
 " setting syntax mode for some file-extensions
-
 autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
+
+"custom highlighting for some files
+au BufNewFile,BufRead *.tt set filetype=html
+au BufNewFile,BufRead *.less set filetype=css
+au BufNewFile,BufRead *.pl.tdy set filetype=perl
 
 " clear buffers created by fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
-
 " get rid of the silly characters in window separators
 set fillchars=""
-
-" stop some plugins from loading
-let loaded_showmarks = 1
 
 " set wildmenu on
 set wildmenu
@@ -159,6 +150,9 @@ nmap <SPACE> <SPACE>:noh<CR>
 let mapleader = ","
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1
+
+"NERDTREE file filters
+let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
 "Refresh firefox on saving website related documents
 autocmd BufWriteCmd *.html,*.css,*.gtpl :call Refresh_firefox()
