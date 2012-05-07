@@ -20,7 +20,7 @@ if has('gui_running')
       set guifont=Envy\ Code\ R\ 10
    elseif has("win32")
       au GUIEnter * simalt ~m
-      set guifont=Envy\ Code\ R:h10 
+      set guifont=Envy\ Code\ R\ Italic:h10 
    elseif has('mac')
       set guifont=Envy\ Code\ R:h13,\ inconsolata:h13
    endif
