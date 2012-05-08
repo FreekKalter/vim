@@ -22,7 +22,7 @@ if has('gui_running')
       au GUIEnter * simalt ~m
       set guifont=Envy\ Code\ R\ Italic:h10 
    elseif has('mac')
-      set guifont=Envy\ Code\ R:h13,\ inconsolata:h13
+      set guifont=inconsolata:h13,\ Envy\ Code\ R:h13
    endif
 else
    "set terminal font
