@@ -10,14 +10,17 @@ call pathogen#infect()
 " Turn on that syntax highlighting
 syntax on
 
+" Support 256 colors
+set t_Co=256
+
 " colorscheme
-set background=dark
+colorscheme molokai
+"set background=dark
 if has('gui_running')
-   colorscheme molokai
 
    " set font
    if has("gui_gtk2")
-      set guifont=Envy\ Code\ R\ 10
+      "set guifont=Envy\ Code\ R\ 10
    elseif has("win32")
       au GUIEnter * simalt ~m
       set guifont=Envy\ Code\ R\ Italic:h10 
