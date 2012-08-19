@@ -13,6 +13,10 @@ syntax on
 " Support 256 colors
 set t_Co=256
 
+" Terminal cursor shape
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
 " colorscheme
 colorscheme molokai
 "set background=dark
@@ -20,7 +24,7 @@ if has('gui_running')
 
    " set font
    if has("gui_gtk2")
-      "set guifont=Envy\ Code\ R\ 10
+      set guifont=Envy\ Code\ R\ 10
    elseif has("win32")
       au GUIEnter * simalt ~m
       set guifont=Envy\ Code\ R\ Italic:h10 
@@ -120,6 +124,7 @@ set laststatus=2
 set guioptions=ac
 
 " Maps to make handling windows a bit easier
+set pastetoggle=<F2>
 noremap <silent> ,h :wincmd h<CR>
 noremap <silent> ,j :wincmd j<CR>
 noremap <silent> ,k :wincmd k<CR>
