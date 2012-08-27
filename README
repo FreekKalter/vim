@@ -1,2 +1,0 @@
-Vim config directory
-.vimrc   This is the main config file for vim. Your .vimrc file should be in your home directory so you should make a link to it like : ~/.vimrc --> ~/vim/.vimrc

@@ -1,0 +1,10 @@
+Vim config directory
+====================
+
+*.vimrc* is the main config file for vim. Your *.vimrc* file should be in your home directory so you should make a link to this file in your home directory. It can't be a symlink and git doesn't handle hardlinks like you would expect. So after you make some changes to this file you make a new hardlink. 
+
+To do this make 2 hooks in *.vim/.git/hooks* , post-commit and post-merge, with the following content.
+
+    #!/bin/sh
+    ln -f $GIT_DIR/../.vimrc $GIT_DIR/../../.vimrc
+    echo 'created link'
