@@ -155,6 +155,14 @@ noremap <silent> <C-0> <C-W>>
 "remove higlight on space in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
 
+" make tab in v mode ident code
+vmap <tab> >gv
+vmap <s-tab> <gv
+
+" make tab in normal mode ident code
+nmap <tab> I<tab><esc>
+nmap <s-tab> ^i<bs><esc>
+
 let mapleader = ","
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1
