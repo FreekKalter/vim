@@ -65,13 +65,15 @@ set showmode
 set cpoptions+=$
 
 " Tabstops are 4 spaces
-set tabstop=3
-set shiftwidth=3
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set expandtab
 set autoindent
-
+  
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
+ 
 
 " set the search scan to wrap lines
 set wrapscan
