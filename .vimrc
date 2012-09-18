@@ -13,13 +13,10 @@ syntax on
 " Support 256 colors
 set t_Co=256
 
-" Terminal cursor shape
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " colorscheme
-colorscheme molokai
-"set background=dark
+colorscheme jellybeans
+
 if has('gui_running')
 
    " set font
