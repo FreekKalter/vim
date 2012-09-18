@@ -15,7 +15,7 @@ set t_Co=256
 
 
 " colorscheme
-colorscheme jellybeans
+colorscheme molokai
 
 if has('gui_running')
 
@@ -126,10 +126,10 @@ set guioptions=ac
 
 " Maps to make handling windows a bit easier
 set pastetoggle=<F2>
-noremap <silent> ,h :wincmd h<CR>
-noremap <silent> ,j :wincmd j<CR>
-noremap <silent> ,k :wincmd k<CR>
-noremap <silent> ,l :wincmd l<CR>
+noremap <silent> <C-h> :wincmd h<CR>
+noremap <silent> <C-j> :wincmd j<CR>
+noremap <silent> <C-k> :wincmd k<CR>
+noremap <silent> <C-l> :wincmd l<CR>
 noremap <silent> ,sb :wincmd p<CR>
 noremap <silent> <C-F9>  :vertical resize -10<CR>
 noremap <silent> <C-F10> :resize +10<CR>
