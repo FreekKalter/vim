@@ -121,6 +121,25 @@ set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugit
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
+" Indicates a fast terminal connection. Quick redraw of screen.
+set ttyfast
+
+" set line numbers relative to current line (helps with going up n lines) 
+set relativenumber
+
+" apply global substitutions on lines
+set gdefault
+
+" save all files on focus lost (only gui) and switching buffers
+au FocusLost * :wa
+set autowriteall
+
+" automatically reload vimrc when it's saved
+augroup AutoReloadVimRC
+  au!
+  au BufWritePost $MYVIMRC so $MYVIMRC
+augroup END
+
 " set the gui options the way I like
 set guioptions=ac
 
@@ -158,8 +177,8 @@ noremap <silent> <C-7> <C-W>>
 noremap <silent> <C-8> <C-W>+
 noremap <silent> <C-9> <C-W>+
 noremap <silent> <C-0> <C-W>>
-:nmap ,:leftabove vert sbn<CR>
-:nmap ,:rightbelow vert sbn<CR>
+:nmap <leader>:leftabove vert sbn<CR>
+:nmap <leader>:rightbelow vert sbn<CR>
 
 "remove higlight on space in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
