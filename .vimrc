@@ -126,26 +126,34 @@ set guioptions=ac
 
 " Maps to make handling windows a bit easier
 set pastetoggle=<F2>
+
+let mapleader = ","
+
+" pane switcing
 noremap <silent> <C-h> :wincmd h<CR>
 noremap <silent> <C-j> :wincmd j<CR>
 noremap <silent> <C-k> :wincmd k<CR>
 noremap <silent> <C-l> :wincmd l<CR>
-noremap <silent> ,sb :wincmd p<CR>
-noremap <silent> <C-F9>  :vertical resize -10<CR>
-noremap <silent> <C-F10> :resize +10<CR>
-noremap <silent> <C-F11> :resize -10<CR>
-noremap <silent> <C-F12> :vertical resize +10<CR>
-noremap <silent> ,s8 :vertical resize 83<CR>
-noremap <silent> ,cj :wincmd j<CR>:close<CR>
-noremap <silent> ,ck :wincmd k<CR>:close<CR>
-noremap <silent> ,ch :wincmd h<CR>:close<CR>
-noremap <silent> ,cl :wincmd l<CR>:close<CR>
-noremap <silent> ,cc :close<CR>
-noremap <silent> ,cw :cclose<CR>
-noremap <silent> ,L <C-W>L
-noremap <silent> ,K <C-W>K
-noremap <silent> ,H <C-W>H
-noremap <silent> ,J <C-W>J
+
+" pave moving 
+noremap <silent> <leader>L <C-W>L
+noremap <silent> <leader>K <C-W>K
+noremap <silent> <leader>H <C-W>H
+noremap <silent> <leader>J <C-W>J
+
+"pane resizing 
+noremap <silent> <leader>w :vertical resize +10<CR>
+noremap <silent> <leader>q :vertical resize -10<CR>
+
+" pane closing with leader key
+noremap <silent> <leader>cj :wincmd j<CR>:close<CR>
+noremap <silent> <leader>ck :wincmd k<CR>:close<CR>
+noremap <silent> <leader>ch :wincmd h<CR>:close<CR>
+noremap <silent> <leader>cl :wincmd l<CR>:close<CR>
+noremap <silent> <leader>cc :close<CR>
+noremap <silent> <leader>cw :cclose<CR>
+
+noremap <silent> <leader>sb :wincmd p<CR>
 noremap <silent> <C-7> <C-W>>
 noremap <silent> <C-8> <C-W>+
 noremap <silent> <C-9> <C-W>+
