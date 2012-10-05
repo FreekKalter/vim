@@ -183,8 +183,11 @@ noremap <silent> <C-0> <C-W>>
 "remove higlight on space in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
 
+" even faster access to ack
+nnoremap <leader>a :Ack
+
 " make ; do the same a : (saves a shift keystroke entering normal-mode)
-nnoremap ; :
+" nnoremap ; :
 
 " map jk in insert-mode to esc key
 :imap jk <Esc>
