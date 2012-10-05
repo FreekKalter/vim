@@ -27,8 +27,12 @@
 'showmarks_include'	showmarks.txt	/*'showmarks_include'*
 'showmarks_textother'	showmarks.txt	/*'showmarks_textother'*
 'showmarks_textupper'	showmarks.txt	/*'showmarks_textupper'*
+:Ack	ack.txt	/*:Ack*
+:AckAdd	ack.txt	/*:AckAdd*
 :Explore	pi_netrw.txt	/*:Explore*
 :Hexplore	pi_netrw.txt	/*:Hexplore*
+:LAck	ack.txt	/*:LAck*
+:LAckAdd	ack.txt	/*:LAckAdd*
 :NERDTree	NERD_tree.txt	/*:NERDTree*
 :NERDTreeClose	NERD_tree.txt	/*:NERDTreeClose*
 :NERDTreeFind	NERD_tree.txt	/*:NERDTreeFind*
@@ -124,6 +128,9 @@ SudoEdit-manual	SudoEdit.txt	/*SudoEdit-manual*
 SudoEdit.txt	SudoEdit.txt	/*SudoEdit.txt*
 SudoRead	SudoEdit.txt	/*SudoRead*
 SudoWrite	SudoEdit.txt	/*SudoWrite*
+ack	ack.txt	/*ack*
+ack-author	ack.txt	/*ack-author*
+ack.txt	ack.txt	/*ack.txt*
 b:netrw_lastfile	pi_netrw.txt	/*b:netrw_lastfile*
 cs	surround.txt	/*cs*
 dav	pi_netrw.txt	/*dav*
