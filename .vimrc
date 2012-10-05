@@ -184,13 +184,19 @@ noremap <silent> <C-0> <C-W>>
 nmap <SPACE> <SPACE>:noh<CR>
 
 " even faster access to ack
-nnoremap <leader>a :Ack
+nnoremap <leader>a :Ack 
+
+" open .vimrc in splitwindow 
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 " make ; do the same a : (saves a shift keystroke entering normal-mode)
 " nnoremap ; :
 
 " map jk in insert-mode to esc key
-:imap jk <Esc>
+:inoremap jk <Esc>
+
+" map jk in command-mode to esc key
+cnoremap jk <C-c>
 
 " use tab to find matching brackets
 nnoremap <tab> %
