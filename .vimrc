@@ -161,8 +161,8 @@ noremap <silent> <leader>H <C-W>H
 noremap <silent> <leader>J <C-W>J
 
 "pane resizing 
-noremap <silent> <leader>w :vertical resize +10<CR>
-noremap <silent> <leader>q :vertical resize -10<CR>
+noremap <silent> <leader>q :vertical resize +10<CR>
+noremap <silent> <leader>w :vertical resize -10<CR>
 
 " pane closing with leader key
 noremap <silent> <leader>cj :wincmd j<CR>:close<CR>
