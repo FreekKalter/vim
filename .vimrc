@@ -115,6 +115,22 @@ set fillchars=""
 " set wildmenu on
 set wildmenu
 
+"define :Tidy command to run perltidy on visual selection || entire buffer"
+command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+
+"run :Tidy on entire buffer and return cursor to (approximate) original position"
+fun DoTidy2()
+    let Pos = line2byte( line( "." ) ) 
+    :Tidy
+    exe "goto " . Pos 
+endfun
+
+"shortcut for normal mode to run on entire buffer then return to current line"
+au Filetype perl nmap <F4> :call DoTidy2()<CR>
+
+"shortcut for visual mode to run on the the current visual selection"
+au Filetype perl vmap <F4> :Tidy<CR>
+
 " Set the status line the way i like it
 set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
 
@@ -186,6 +202,7 @@ nmap <SPACE> <SPACE>:noh<CR>
 " even faster access to ack
 nnoremap <leader>a :Ack 
 
+nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 " open .vimrc in splitwindow 
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
@@ -209,7 +226,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
 "Refresh firefox on saving website related documents
-autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js :call Refresh_firefox()
+autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
 function! Refresh_firefox()
   if &modified
     write
