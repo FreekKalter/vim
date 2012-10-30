@@ -100,11 +100,6 @@ autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
 autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
 
 "custom highlighting for some files
-au BufNewFile,BufRead *.tt set filetype=tt2html
-au BufNewFile,BufRead *.tt2 set filetype=tt2html
-
-au BufNewFile,BufRead *.less set filetype=css
-au BufNewFile,BufRead *.pl.tdy set filetype=perl
 
 " clear buffers created by fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
