@@ -116,17 +116,17 @@ set fillchars=""
 set wildmenu
 
 "define :Tidy command to run perltidy on visual selection || entire buffer"
-command -range=% -nargs=* Tidy <line1>,<line2>!perltidy
+command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 
 "run :Tidy on entire buffer and return cursor to (approximate) original position"
-fun DoTidy2()
+fun! DoTidy()
     let Pos = line2byte( line( "." ) ) 
     :Tidy
     exe "goto " . Pos 
 endfun
 
 "shortcut for normal mode to run on entire buffer then return to current line"
-au Filetype perl nmap <F4> :call DoTidy2()<CR>
+au Filetype perl nmap <F4> :call DoTidy()<CR>
 
 "shortcut for visual mode to run on the the current visual selection"
 au Filetype perl vmap <F4> :Tidy<CR>
