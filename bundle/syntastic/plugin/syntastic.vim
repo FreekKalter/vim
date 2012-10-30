@@ -54,6 +54,12 @@ if !exists("g:syntastic_enable_highlighting")
     let g:syntastic_enable_highlighting = 1
 endif
 
+" highlighting requires getmatches introduced in 7.1.040
+if g:syntastic_enable_highlighting == 1 &&
+            \ (v:version < 701 || v:version == 701 && has('patch040'))
+    let g:syntastic_enable_highlighting = 1
+endif
+
 if !exists("g:syntastic_echo_current_error")
     let g:syntastic_echo_current_error = 1
 endif
@@ -139,7 +145,7 @@ function! s:UpdateErrors(auto_invoked)
     endif
 
     if g:syntastic_enable_highlighting
-        call s:HightlightErrors()
+        call s:HighlightErrors()
     endif
 
     if g:syntastic_auto_jump && s:BufHasErrorsOrWarningsToDisplay()
@@ -380,7 +386,7 @@ endfunction
 "
 "If the 'force_highlight_callback' key is set for an error item, then invoke
 "the callback even if it can be highlighted automatically.
-function! s:HightlightErrors()
+function! s:HighlightErrors()
     call s:ClearErrorHighlights()
 
     let fts = substitute(&ft, '-', '_', 'g')
@@ -433,7 +439,10 @@ function! s:WideMsg(msg)
     let old_ruler = &ruler
     let old_showcmd = &showcmd
 
-    let msg = strpart(a:msg, 0, winwidth(0)-1)
+    "convert tabs to spaces so that the tabs count towards the window width
+    "as the proper amount of characters
+    let msg = substitute(a:msg, "\t", repeat(" ", &tabstop), "g")
+    let msg = strpart(msg, 0, winwidth(0)-1)
 
     "This is here because it is possible for some error messages to begin with
     "\n which will cause a "press enter" prompt. I have noticed this in the
@@ -480,10 +489,11 @@ endfunction
 "the script changes &shellpipe and &shell to stop the screen flicking when
 "shelling out to syntax checkers. Not all OSs support the hacks though
 function! s:OSSupportsShellpipeHack()
-    if !exists("s:os_supports_shellpipe_hack")
-        let s:os_supports_shellpipe_hack = !s:running_windows && (s:uname() !~ "FreeBSD") && (s:uname() !~ "OpenBSD")
-    endif
-    return s:os_supports_shellpipe_hack
+    return !s:running_windows && (s:uname() !~ "FreeBSD") && (s:uname() !~ "OpenBSD")
+endfunction
+
+function! s:IsRedrawRequiredAfterMake()
+    return !s:running_windows && (s:uname() =~ "FreeBSD" || s:uname() =~ "OpenBSD")
 endfunction
 
 function! s:uname()
@@ -604,7 +614,7 @@ function! SyntasticMake(options)
     let &shellpipe=old_shellpipe
     let &shell=old_shell
 
-    if s:OSSupportsShellpipeHack()
+    if s:IsRedrawRequiredAfterMake()
         redraw!
     endif
 
