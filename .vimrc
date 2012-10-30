@@ -214,6 +214,7 @@ cnoremap jk <C-c>
 nnoremap <tab> %
 vnoremap <tab> %
 
+let g:syntastic_go_checker="gofmt"
 nmap <leader>n :NERDTreeToggle<cr>
 let NERDTreeShowBookmarks=1
 
