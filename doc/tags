@@ -53,7 +53,6 @@
 :RmVimball	pi_vimball.txt	/*:RmVimball*
 :Sexplore	pi_netrw.txt	/*:Sexplore*
 :Texplore	pi_netrw.txt	/*:Texplore*
-:ToggleRaibowParenthesis	rainbow_parenthsis.txt	/*:ToggleRaibowParenthesis*
 :UseVimball	pi_vimball.txt	/*:UseVimball*
 :Vexplore	pi_netrw.txt	/*:Vexplore*
 :VimballList	pi_vimball.txt	/*:VimballList*
@@ -185,6 +184,7 @@ fugitive-~	fugitive.txt	/*fugitive-~*
 fugitive.txt	fugitive.txt	/*fugitive.txt*
 g:NetrwTopLvlMenu	pi_netrw.txt	/*g:NetrwTopLvlMenu*
 g:Netrw_funcref	pi_netrw.txt	/*g:Netrw_funcref*
+g:SuperTabClosePreviewOnPopupClose	supertab.txt	/*g:SuperTabClosePreviewOnPopupClose*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
 g:SuperTabContextDefaultCompletionType	supertab.txt	/*g:SuperTabContextDefaultCompletionType*
 g:SuperTabCrMapping	supertab.txt	/*g:SuperTabCrMapping*
@@ -458,18 +458,6 @@ netrw_filehandler	pi_netrw.txt	/*netrw_filehandler*
 network	pi_netrw.txt	/*network*
 pi_netrw.txt	pi_netrw.txt	/*pi_netrw.txt*
 pi_vimball.txt	pi_vimball.txt	/*pi_vimball.txt*
-rainbow_parenthsis#Activate()	rainbow_parenthsis.txt	/*rainbow_parenthsis#Activate()*
-rainbow_parenthsis#Clear()	rainbow_parenthsis.txt	/*rainbow_parenthsis#Clear()*
-rainbow_parenthsis#LoadBraces()	rainbow_parenthsis.txt	/*rainbow_parenthsis#LoadBraces()*
-rainbow_parenthsis#LoadChevrons()	rainbow_parenthsis.txt	/*rainbow_parenthsis#LoadChevrons()*
-rainbow_parenthsis#LoadRound()	rainbow_parenthsis.txt	/*rainbow_parenthsis#LoadRound()*
-rainbow_parenthsis#LoadSquare()	rainbow_parenthsis.txt	/*rainbow_parenthsis#LoadSquare()*
-rainbow_parenthsis#Toggle()	rainbow_parenthsis.txt	/*rainbow_parenthsis#Toggle()*
-rainbow_parenthsis-about	rainbow_parenthsis.txt	/*rainbow_parenthsis-about*
-rainbow_parenthsis-commands	rainbow_parenthsis.txt	/*rainbow_parenthsis-commands*
-rainbow_parenthsis-configure	rainbow_parenthsis.txt	/*rainbow_parenthsis-configure*
-rainbow_parenthsis-functions	rainbow_parenthsis.txt	/*rainbow_parenthsis-functions*
-rainbow_parenthsis.txt	rainbow_parenthsis.txt	/*rainbow_parenthsis.txt*
 rcp	pi_netrw.txt	/*rcp*
 rsync	pi_netrw.txt	/*rsync*
 s:netrw_passwd	pi_netrw.txt	/*s:netrw_passwd*
@@ -484,6 +472,8 @@ showmarks-highlighting	showmarks.txt	/*showmarks-highlighting*
 showmarks-mappings	showmarks.txt	/*showmarks-mappings*
 showmarks.txt	showmarks.txt	/*showmarks.txt*
 supertab	supertab.txt	/*supertab*
+supertab-closepreviewonpopupclose	supertab.txt	/*supertab-closepreviewonpopupclose*
+supertab-completionchaining	supertab.txt	/*supertab-completionchaining*
 supertab-completioncontexts	supertab.txt	/*supertab-completioncontexts*
 supertab-contextdefault	supertab.txt	/*supertab-contextdefault*
 supertab-contextdiscover	supertab.txt	/*supertab-contextdiscover*

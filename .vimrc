@@ -34,7 +34,11 @@ endif
 
 " Get that filetype stuff happening
 filetype on
-set complete-=i
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+set completeopt=longest,menuone
+"let g:SuperTabLongestHighlight = 1
+" set complete=.,b,u,]
 
 "NERDTree options
 "let loaded_nerd_tree=1
