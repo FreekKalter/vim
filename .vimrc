@@ -161,7 +161,7 @@ set guioptions=ac
 " Maps to make handling windows a bit easier
 set pastetoggle=<F2>
 
-let mapleader = ","
+let mapleader = ";"
 
 " pane switcing
 noremap <silent> <C-h> :wincmd h<CR>
@@ -176,8 +176,10 @@ noremap <silent> <leader>H <C-W>H
 noremap <silent> <leader>J <C-W>J
 
 "pane resizing 
-noremap <silent> <leader>q :vertical resize +10<CR>
-noremap <silent> <leader>w :vertical resize -10<CR>
+noremap <silent> <leader>l :vertical resize +10<CR>
+noremap <silent> <leader>h :vertical resize -10<CR>
+noremap <silent> <leader>j :resize +10<CR>
+noremap <silent> <leader>k :resize -10<CR>
 
 " pane closing with leader key
 noremap <silent> <leader>cj :wincmd j<CR>:close<CR>
@@ -192,8 +194,6 @@ noremap <silent> <C-7> <C-W>>
 noremap <silent> <C-8> <C-W>+
 noremap <silent> <C-9> <C-W>+
 noremap <silent> <C-0> <C-W>>
-:nmap <leader>:leftabove vert sbn<CR>
-:nmap <leader>:rightbelow vert sbn<CR>
 
 "remove higlight on space in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
