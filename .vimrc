@@ -195,6 +195,15 @@ noremap <silent> <C-8> <C-W>+
 noremap <silent> <C-9> <C-W>+
 noremap <silent> <C-0> <C-W>>
 
+" change working dir to dir of current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" AWSOME!!!!
+" mapping to run last run command in last active window
+" so during hacking in vim, simply ;rl and BAM file saved and run in next tmux
+" pane.
+noremap <leader>rl :w<Bar>execute 'silent !tmux send-keys -t .-1 Up C-m'<Bar>redraw!<CR>
+
 "remove higlight on space in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
 
@@ -202,6 +211,7 @@ nmap <SPACE> <SPACE>:noh<CR>
 nnoremap <leader>a :Ack 
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
+
 " open .vimrc in splitwindow 
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
