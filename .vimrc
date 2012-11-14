@@ -13,7 +13,6 @@ syntax on
 " Support 256 colors
 set t_Co=256
 
-
 " colorscheme
 colorscheme molokai
 
@@ -31,6 +30,12 @@ if has('gui_running')
 else
    "set terminal font
 endif
+
+" map jk in insert-mode to esc key
+:inoremap jk <Esc>
+
+" map jk in command-mode to esc key
+cnoremap jk <C-c>
 
 " Get that filetype stuff happening
 filetype on
@@ -99,12 +104,6 @@ set vb
 " virtual edit: move the cursor on invalid empty space
 set virtualedit=all
 
-" setting syntax mode for some file-extensions
-autocmd BufNewFile,BufRead *.pl set formatprg=astyle\ -A7s2x
-autocmd! BufNewFile,BufRead *.pde setlocal ft=arduino
-
-"custom highlighting for some files
-
 " clear buffers created by fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
@@ -149,6 +148,11 @@ set gdefault
 au FocusLost * :wa
 set autowriteall
 
+let mapleader = ";"
+
+" open .vimrc in splitwindow 
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
 " automatically reload vimrc when it's saved
 augroup AutoReloadVimRC
   au!
@@ -158,10 +162,10 @@ augroup END
 " set the gui options the way I like
 set guioptions=ac
 
-" Maps to make handling windows a bit easier
+" use this to paste indented code 
 set pastetoggle=<F2>
 
-let mapleader = ";"
+" Maps to make handling windows a bit easier
 
 " pane switcing
 noremap <silent> <C-h> :wincmd h<CR>
@@ -212,18 +216,6 @@ nnoremap <leader>a :Ack
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-" open .vimrc in splitwindow 
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-
-" make ; do the same a : (saves a shift keystroke entering normal-mode)
-" nnoremap ; :
-
-" map jk in insert-mode to esc key
-:inoremap jk <Esc>
-
-" map jk in command-mode to esc key
-cnoremap jk <C-c>
-
 " use tab to find matching brackets
 nnoremap <tab> %
 vnoremap <tab> %
@@ -234,6 +226,8 @@ let NERDTreeShowBookmarks=1
 
 "NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
+
+autocmd FileType c,perl,go,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "Refresh firefox on saving website related documents
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
