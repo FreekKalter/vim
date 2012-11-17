@@ -16,19 +16,11 @@ set t_Co=256
 " colorscheme
 colorscheme molokai
 
-if has('gui_running')
-
-   " set font
-   if has("gui_gtk2")
-      set guifont=Envy\ Code\ R\ 10
-   elseif has("win32")
-      au GUIEnter * simalt ~m
-      set guifont=Envy\ Code\ R\ Italic:h10 
-   elseif has('mac')
-      set guifont=inconsolata:h13,\ Envy\ Code\ R:h13
-   endif
-else
-   "set terminal font
+if has("linux")
+    let loaded_vitality = 1
+    au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/Terminal/terminalrc"
+    au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
+    au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 endif
 
 " map jk in insert-mode to esc key
@@ -228,10 +220,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
 autocmd FileType c,perl,go,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/Terminal/terminalrc"
-au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
-au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 
 "Refresh firefox on saving website related documents
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
