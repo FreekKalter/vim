@@ -10,6 +10,11 @@ call pathogen#infect()
 " Turn on that syntax highlighting
 syntax on
 
+" syntastic settings
+let g:syntastic_auto_loc_list=1 
+let g:syntastic_auto_jump=1 
+let g:syntastic_perl_lib_path = './lib'
+
 " Support 256 colors
 set t_Co=256
 
@@ -236,3 +241,8 @@ function! Refresh_firefox()
           \ nc -w 1 localhost 4242 2>&1 > /dev/null
   endif
 endfunction
+
+
+ab rigth right
+ab rigth_ right_
+ab _rigth _right
