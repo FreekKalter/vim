@@ -9,7 +9,7 @@ SCRIPT_LOC=\$(readlink -f \$0)
 SCRIPT_PATH=`dirname \$SCRIPT_LOC`
 GIT_DIR="\$SCRIPT_PATH/.."
 
-ln -f \$GIT_DIR/../.vim ~/.vim
+ln -f \$GIT_DIR/../.vimrc ~/.vimrc
 
 echo "Links created"
 };
