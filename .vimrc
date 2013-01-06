@@ -216,7 +216,7 @@ nnoremap <leader>a :Ack
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " use tab to find matching brackets
 nnoremap <tab> %
