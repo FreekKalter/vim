@@ -31,6 +31,7 @@ if hostname == "London"
     au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 endif
 
+set encoding=utf-8
 " map jk in insert-mode to esc key
 :inoremap jk <Esc>
 
@@ -45,9 +46,7 @@ set completeopt=longest,menuone
 "let g:SuperTabLongestHighlight = 1
 " set complete=.,b,u,]
 
-"NERDTree options
-"let loaded_nerd_tree=1
-"let NERDTreeQuitOnOpen=1
+let g:sparkupNextMapping = '<c-x>'
 
 filetype plugin on
 filetype indent on
@@ -112,6 +111,7 @@ set fillchars=""
 
 " set wildmenu on
 set wildmenu
+set wildmode=longest,list
 
 "define :Tidy command to run perltidy on visual selection || entire buffer"
 command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
@@ -216,15 +216,33 @@ nnoremap <leader>a :Ack
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
+" keep cursor in position when joining lines
+nnoremap J mzJ`z
+
+" searching/scrolling keeps focus in the middle of the screen 
+" nnoremap n nzz
+" nnoremap } }zz
+set scrolloff=5
+
+" make moving up and down more intuitive with wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " use tab to find matching brackets
 nnoremap <tab> %
 vnoremap <tab> %
 
+"NERDTree options
+"let loaded_nerd_tree=1
+"let NERDTreeQuitOnOpen=1
+
 let g:syntastic_go_checker="gofmt"
-nmap <leader>n :NERDTreeToggle<cr>
+nmap <leader>n :e.<cr>
 let NERDTreeShowBookmarks=1
+let NERDTreeHijackNetrw=1
 
 "NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
