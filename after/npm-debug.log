@@ -1,0 +1,32 @@
+info it worked if it ends with ok
+verbose cli [ '/usr/bin/nodejs',
+verbose cli   '/usr/bin/npm',
+verbose cli   'completion',
+verbose cli   '--color',
+verbose cli   'false',
+verbose cli   '--loglevel',
+verbose cli   'error',
+verbose cli   '--',
+verbose cli   'npm',
+verbose cli   'in' ]
+info using npm@1.1.4
+info using node@v0.6.19
+verbose config file /home/fkalter/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+ERR! Error: ENOENT, open '/usr/share/npm/lib/utils/completion.sh'
+ERR! You may report this log at:
+ERR!     <http://bugs.debian.org/npm>
+ERR! or use
+ERR!     reportbug --attach /home/fkalter/.vim/after/npm-debug.log npm
+ERR! 
+ERR! System Linux 3.5.0-22-generic
+ERR! command "/usr/bin/nodejs" "/usr/bin/npm" "completion" "--color" "false" "--loglevel" "error" "--" "npm" "in"
+ERR! cwd /home/fkalter/.vim/after
+ERR! node -v v0.6.19
+ERR! npm -v 1.1.4
+ERR! path /usr/share/npm/lib/utils/completion.sh
+ERR! code ENOENT
+ERR! message ENOENT, open '/usr/share/npm/lib/utils/completion.sh'
+ERR! errno {}
+verbose exit [ 1, true ]
