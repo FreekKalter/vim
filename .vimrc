@@ -139,7 +139,7 @@ set laststatus=2
 set ttyfast
 
 " set line numbers relative to current line (helps with going up n lines) 
-set relativenumber
+" set relativenumber
 
 " apply global substitutions on lines
 set gdefault
