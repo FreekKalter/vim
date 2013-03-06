@@ -8,18 +8,21 @@ set nocompatible
 call pathogen#infect()
 
 " Turn on that syntax highlighting
-syntax on
+syntax enable
 
 " syntastic settings
 let g:syntastic_auto_loc_list=1 
 let g:syntastic_auto_jump=1 
 let g:syntastic_perl_lib_path = './lib'
 
-" Support 256 colors
-set t_Co=256
-
 " colorscheme
-colorscheme molokai
+"set background=dark
+colorscheme jellybeans
+autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
+
+if has('gui_running')
+    set guifont=DejaVu\ Sans\ Mono\ 10
+endif
 
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
@@ -161,6 +164,7 @@ augroup END
 
 " set the gui options the way I like
 set guioptions=ac
+set mouse-=a
 
 " use this to paste indented code 
 set pastetoggle=<F2>
