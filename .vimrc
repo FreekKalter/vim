@@ -27,7 +27,7 @@ endif
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
    
-if hostname == "London"
+if hostname == "London" && ! has('gui_running')
     let loaded_vitality = 1
     au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/Terminal/terminalrc"
     au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
@@ -35,14 +35,13 @@ if hostname == "London"
 endif
 
 set encoding=utf-8
-" map jk in insert-mode to esc key
+" map jk in insert-/command-mode to esc key
 :inoremap jk <Esc>
-
-" map jk in command-mode to esc key
 cnoremap jk <C-c>
 
 " Get that filetype stuff happening
 filetype on
+
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=longest,menuone
@@ -54,7 +53,7 @@ let g:sparkupNextMapping = '<c-x>'
 filetype plugin on
 filetype indent on
 
-" Why is this not a default
+" Why is this not a default (allow hidden buffers)
 set hidden
 
 " higlight search pattern
@@ -82,7 +81,6 @@ set autoindent
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
  
-
 " set the search scan to wrap lines
 set wrapscan
 
@@ -126,10 +124,8 @@ fun! DoTidy()
     exe "goto " . Pos 
 endfun
 
-"shortcut for normal mode to run on entire buffer then return to current line"
+"shortcut for normal/visual mode to run on entire buffer then return to current line"
 au Filetype perl nmap <F4> :call DoTidy()<CR>
-
-"shortcut for visual mode to run on the the current visual selection"
 au Filetype perl vmap <F4> :Tidy<CR>
 
 " Set the status line the way i like it
@@ -148,8 +144,8 @@ set ttyfast
 set gdefault
 
 " save all files on focus lost (only gui) and switching buffers
-au FocusLost * :wa
-set autowriteall
+" au FocusLost * :wa
+" set autowriteall
 
 let mapleader = ";"
 
@@ -212,7 +208,7 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " pane.
 noremap <leader>rl :w<Bar>execute 'silent !tmux send-keys -t .-1 Up C-m'<Bar>redraw!<CR>
 
-"remove higlight on space in normal mode
+"remove higlight on space in normal mode 
 nmap <SPACE> <SPACE>:noh<CR>
 
 " even faster access to ack
@@ -239,6 +235,17 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 nnoremap <tab> %
 vnoremap <tab> %
 
+" CTRL-X and SHIFT-Del are Cut
+vnoremap <C-X> "+x
+vnoremap <S-Del> "+x
+
+" CTRL-C and CTRL-Insert are Copy
+vnoremap <C-C> "+y
+vnoremap <C-Insert> "+y
+
+" CTRL-V and SHIFT-Insert are Paste
+map <C-V>		"+gP
+map <S-Insert>		"+gP
 "NERDTree options
 "let loaded_nerd_tree=1
 "let NERDTreeQuitOnOpen=1
@@ -251,7 +258,11 @@ let NERDTreeHijackNetrw=1
 "NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
-autocmd FileType c,perl,go,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup Go
+    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+augroup END
+    
 
 "Refresh firefox on saving website related documents
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
