@@ -17,7 +17,7 @@ let g:syntastic_perl_lib_path = './lib'
 
 " colorscheme
 set background=dark
-colorscheme jellybeans
+colorscheme codeschool
 autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
 
 if has('gui_running')
@@ -44,17 +44,17 @@ cnoremap jk <C-c>
 
 " Get that filetype stuff happening
 filetype on
+filetype plugin on
+filetype indent on
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=longest,menuone
-"let g:SuperTabLongestHighlight = 1
+" let g:SuperTabLongestHighlight = 1
 " set complete=.,b,u,]
 
 let g:sparkupNextMapping = '<c-x>'
 
-filetype plugin on
-filetype indent on
 
 " Why is this not a default (allow hidden buffers)
 set hidden
@@ -117,17 +117,17 @@ set fillchars=""
 set wildmenu
 set wildmode=longest,list
 
-"define :Tidy command to run perltidy on visual selection || entire buffer"
+" define :Tidy command to run perltidy on visual selection || entire buffer"
 command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 
-"run :Tidy on entire buffer and return cursor to (approximate) original position"
+" run :Tidy on entire buffer and return cursor to (approximate) original position"
 fun! DoTidy()
     let Pos = line2byte( line( "." ) ) 
     :Tidy
     exe "goto " . Pos 
 endfun
 
-"shortcut for normal/visual mode to run on entire buffer then return to current line"
+" shortcut for normal/visual mode to run on entire buffer then return to current line"
 au Filetype perl nmap <F4> :call DoTidy()<CR>
 au Filetype perl vmap <F4> :Tidy<CR>
 
@@ -182,7 +182,7 @@ noremap <silent> <leader>K <C-W>K
 noremap <silent> <leader>H <C-W>H
 noremap <silent> <leader>J <C-W>J
 
-"pane resizing 
+" pane resizing 
 noremap <silent> <leader>l :vertical resize +10<CR>
 noremap <silent> <leader>h :vertical resize -10<CR>
 noremap <silent> <leader>j :resize +10<CR>
@@ -211,7 +211,7 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " pane.
 noremap <leader>rl :w<Bar>execute 'silent !tmux send-keys -t .-1 Up C-m'<Bar>redraw!<CR>
 
-"remove higlight on space in normal mode 
+" remove higlight on space in normal mode 
 nmap <SPACE> <SPACE>:noh<CR>
 
 " even faster access to ack
@@ -239,29 +239,30 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " CTRL-X and SHIFT-Del are Cut
-vnoremap <C-X> "+x
-vnoremap <S-Del> "+x
+vnoremap <C-X>      "+x
+vnoremap <S-Del>    "+x
 
 " CTRL-C and CTRL-Insert are Copy
-vnoremap <C-C> "+y
+vnoremap <C-C>      "+y
 vnoremap <C-Insert> "+y
 
 " CTRL-V and SHIFT-Insert are Paste
 map <C-V>		"+gP
-map <S-Insert>		"+gP
-"NERDTree options
-"let loaded_nerd_tree=1
-"let NERDTreeQuitOnOpen=1
+map <S-Insert>	"+gP
+" NERDTree options
+" let loaded_nerd_tree=1
+" let NERDTreeQuitOnOpen=1
 
 let g:syntastic_go_checker="gofmt"
 nmap <leader>n :e.<cr>
 let NERDTreeShowBookmarks=1
 let NERDTreeHijackNetrw=1
 
-"NERDTREE file filters
+" NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
 autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/
 augroup Go
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
 augroup END
