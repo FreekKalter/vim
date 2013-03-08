@@ -16,12 +16,15 @@ let g:syntastic_auto_jump=1
 let g:syntastic_perl_lib_path = './lib'
 
 " colorscheme
-"set background=dark
+set background=dark
 colorscheme jellybeans
 autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
 
 if has('gui_running')
     set guifont=DejaVu\ Sans\ Mono\ 10
+     " maximize window when vim is fully loaded otherwise some other comands
+     " overrides these values
+    autocmd VimEnter * set lines=60 columns=239  
 endif
 
 let os = substitute(system('uname'), "\n", "", "")
@@ -34,6 +37,7 @@ if hostname == "London" && ! has('gui_running')
 endif
 
 set encoding=utf-8
+
 " map jk in insert-/command-mode to esc key
 :inoremap jk <Esc>
 cnoremap jk <C-c>
@@ -263,7 +267,8 @@ augroup Go
 augroup END
     
 
-"Refresh firefox on saving website related documents
+" Refresh firefox on saving website related documents
+" Requires mozrepl firefox plugin
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
 function! Refresh_firefox()
   if &modified
@@ -276,7 +281,6 @@ function! Refresh_firefox()
           \ nc -w 1 localhost 4242 2>&1 > /dev/null
   endif
 endfunction
-
 
 ab rigth right
 ab rigth_ right_
