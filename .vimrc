@@ -261,8 +261,12 @@ let NERDTreeHijackNetrw=1
 " NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
+" e flag is to surpress error message if pattern is not found
+autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/e
+autocmd FileType zsh autocmd BufWritePre <buffer> :%s/^#\(\w\)/# \1/e
+autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \1/e
+
 autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
-autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/
 augroup Go
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
 augroup END
