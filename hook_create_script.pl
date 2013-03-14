@@ -16,8 +16,11 @@ echo "Links created"
 
 for( qw(post-commit  post-merge) ){
     my $file = ".git/hooks/$_";
-    open(my $dh, ">" , $file) or die "Can't open $file for writing";
+    open(my $dh, ">" , $file) or die "Can't open $file for writing: $!";
     print $dh $script;
-    `chmod +x $file`;
+    close($dh);
+    system("chmod", "+x", $file) == 0 or die "Can't change permission for $file: $?";
 };
 say "Hooks created";
+
+system(".git/hooks/post-commit") ==0 or die "Can't execute post-commit hook: $?";
