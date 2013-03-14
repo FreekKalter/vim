@@ -17,14 +17,17 @@ let g:syntastic_perl_lib_path = './lib'
 
 " colorscheme
 set background=dark
-colorscheme codeschool
 autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
 
 if has('gui_running')
+    colorscheme codeschool
     set guifont=DejaVu\ Sans\ Mono\ 10
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
     autocmd VimEnter * set lines=60 columns=239  
+
+else
+    colorscheme molokai
 endif
 
 let os = substitute(system('uname'), "\n", "", "")
