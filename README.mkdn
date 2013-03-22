@@ -10,7 +10,7 @@ The *hook-create* takes care of this for you.
 
 So when starting from scratch:
 
-    * clone this rep
+    * clone this repo
     * run ./hook_create_script.pl
 
 ## License

@@ -107,6 +107,9 @@ set ch=2
 " set linenumbers
 set number
 
+" highlight current line
+set cursorline
+
 " set visual bell -- i hate that damned beeping
 set vb
 
