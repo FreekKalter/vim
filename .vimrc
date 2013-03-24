@@ -30,6 +30,7 @@ if has('gui_running')
     autocmd VimEnter * set lines=60 columns=239  
 
 else
+    set t_Co=256
     colorscheme molokai
 endif
 
