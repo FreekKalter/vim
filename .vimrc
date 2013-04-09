@@ -263,7 +263,6 @@ map <S-Insert>	"+gP
 " let loaded_nerd_tree=1
 " let NERDTreeQuitOnOpen=1
 
-let g:syntastic_go_checker="gofmt"
 nmap <leader>n :e.<cr>
 let NERDTreeShowBookmarks=1
 let NERDTreeHijackNetrw=1
@@ -271,13 +270,23 @@ let NERDTreeHijackNetrw=1
 " NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
-" e flag is to surpress error message if pattern is not found
-autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/e
-autocmd FileType zsh autocmd BufWritePre <buffer> :%s/^#\(\w\)/# \1/e
-autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \1/e
+" clean comments, space after comment char
+augroup clean_comments
+    " e flag is to surpress error message if pattern is not found
+    autocmd!
+    autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/e
+    autocmd FileType zsh autocmd BufWritePre <buffer> :%s/^#\(\w\)/# \2/e
+    "autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \2/e
+augroup end
 
+nnoremap <leader>u viw~
+
+" clean whitespace at end of lines
 autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+let g:syntastic_go_checker="gofmt"
 augroup Go
+    au!
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
 augroup END
     
@@ -300,3 +309,6 @@ endfunction
 ab rigth right
 ab rigth_ right_
 ab _rigth _right
+ab frk Freek Kalter
+ab ccopy Copyright (c) 2013 Freek Kalter
+ab wbs kalteronline.org

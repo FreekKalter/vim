@@ -3,6 +3,7 @@ if exists("did_load_filetypes")
   finish
 endif
 augroup filetypedetect
+    au!
     au BufNewFile,BufRead *.tt set filetype=tt2html
     au BufNewFile,BufRead *.tt2 set filetype=tt2html
 
