@@ -3,21 +3,84 @@
 "
 " based on Derek Wyats original vimrc (and awsome videos)
 
-
 " Forget being compatible with good ol' vi
 set nocompatible
-
 " call pathogen to mangage runtime paths
 call pathogen#infect()
 
+" Basic vim settings {{{
 " Turn on that syntax highlighting
 syntax enable
+" Get that filetype stuff happening
+filetype on
+filetype plugin on
+filetype indent on
 
-" syntastic settings
+set encoding=utf-8
+" Why is this not a default (allow hidden buffers)
+set hidden
+" higlight search pattern
+set hlsearch
+" set temp directory to create swap files, windows needs this
+set directory+=,~/tmp,$TMP
+set incsearch
+set showmode
+" set dollar sign at end of what your changing
+set cpoptions+=$
+
+" Tabstops are 4 spaces
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+" Allow backspacing over indent, eol, and the start of an insert
+set backspace=2
+
+" set the search scan to wrap lines
+set wrapscan
+" set the search scan so that it ignores case when the search is all lower
+" case but recognizes uppercase if it's specified
+set ignorecase
+set smartcase
+" set the forward slash to be the slash of note.  Backslashes suck
+set shellslash
+" Make command line two lines high
+set ch=2
+" set linenumbers
+set number
+" highlight current line
+set cursorline
+" set visual bell -- i hate that damned beeping
+set vb
+" virtual edit: move the cursor on invalid empty space
+set virtualedit=all
+
+" Set the status line the way i like it
+set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
+
+" tell VIM to always put a status line in, even if there is only one window
+set laststatus=2
+
+" Indicates a fast terminal connection. Quick redraw of screen.
+set ttyfast
+" apply global substitutions on lines
+set gdefault
+
+" save all files on focus lost (only gui) and switching buffers
+" au FocusLost * :wa
+" set autowriteall
+" }}}
+" Syntastic {{{
+
 let g:syntastic_auto_loc_list=1 
 let g:syntastic_auto_jump=1 
 let g:syntastic_perl_lib_path = './lib'
+let g:syntastic_go_checker="gofmt"
 
+" }}}
+
+" Visual stuff {{{
 " colorscheme
 set background=dark
 autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
@@ -42,17 +105,62 @@ if hostname == "London" && ! has('gui_running')
     au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
     au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 endif
+" }}}
+" Pulse Line {{{
 
-set encoding=utf-8
+function! s:Pulse() " {{{
+    let current_window = winnr()
+    windo set nocursorline
+    execute current_window . 'wincmd w'
+    setlocal cursorline
+
+    redir => old_hi
+        silent execute 'hi CursorLine'
+    redir END
+    let old_guibg = matchlist( old_hi, 'guibg=\(#[0-9a-zA-Z]\{6}\)') 
+    let old_hi = split(old_hi, '\n')[0]
+    let old_hi = substitute(old_hi, 'xxx', '', '')
+
+    if has('gui_running')
+        for i in range(5)
+            silent execute "hi CursorLine guibg=Red"
+            redraw
+            sleep 16m
+            
+            silent execute "hi CursorLine guibg=". old_guibg[1]
+            redraw
+            sleep 16m
+        endfor
+    else
+        let steps = 9
+        let width = 1
+        let start = width
+        let end = steps * width
+        let color = 1
+
+        for i in range(start, end, width)
+            execute "hi CursorLine ctermbg=" . (color + i)
+            redraw
+            sleep 6m
+        endfor
+        for i in range(end, start, -1 * width)
+            execute "hi CursorLine ctermbg=" . (color + i)
+            redraw
+            sleep 6m
+        endfor
+    endif
+
+    execute 'hi ' . old_hi
+endfunction " }}}
+command! -nargs=0 Pulse call s:Pulse()
+
+" }}}
+nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 
 " map jk in insert-/command-mode to esc key
-:inoremap jk <Esc>
+inoremap jk <Esc>
 cnoremap jk <C-c>
 
-" Get that filetype stuff happening
-filetype on
-filetype plugin on
-filetype indent on
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -62,61 +170,6 @@ set completeopt=longest,menuone
 
 let g:sparkupNextMapping = '<c-x>'
 
-
-" Why is this not a default (allow hidden buffers)
-set hidden
-
-" higlight search pattern
-set hlsearch
-
-" set temp directory to create swap files, windows needs this
-set directory+=,~/tmp,$TMP
-
-" Incrementally match the search
-set incsearch
-
-" At least let yourself know what mode you're in
-set showmode
-
-" set dollar sign at end of what your changing
-set cpoptions+=$
-
-" Tabstops are 4 spaces
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set autoindent
-  
-" Allow backspacing over indent, eol, and the start of an insert
-set backspace=2
- 
-" set the search scan to wrap lines
-set wrapscan
-
-" set the search scan so that it ignores case when the search is all lower
-" case but recognizes uppercase if it's specified
-set ignorecase
-set smartcase
-
-" set the forward slash to be the slash of note.  Backslashes suck
-set shellslash
-
-" Make command line two lines high
-set ch=2
-
-" set linenumbers
-set number
-
-" highlight current line
-set cursorline
-
-" set visual bell -- i hate that damned beeping
-set vb
-
-" virtual edit: move the cursor on invalid empty space
-set virtualedit=all
-
 " clear buffers created by fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 
@@ -125,7 +178,22 @@ set fillchars=""
 
 " set wildmenu on
 set wildmenu
-set wildmode=longest,list
+set wildmode=list:longest
+set wildignore+=.hg,.git,.snv   " Version control
+
+" Line Return {{{
+
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Amit
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+" }}}
 
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
@@ -141,29 +209,21 @@ endfun
 au Filetype perl nmap <F4> :call DoTidy()<CR>
 au Filetype perl vmap <F4> :Tidy<CR>
 
-" Set the status line the way i like it
-set statusline=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]\ %{fugitive#statusline()}
-
-" tell VIM to always put a status line in, even if there is only one window
-set laststatus=2
-
-" Indicates a fast terminal connection. Quick redraw of screen.
-set ttyfast
-
-" set line numbers relative to current line (helps with going up n lines) 
-" set relativenumber
-
-" apply global substitutions on lines
-set gdefault
-
-" save all files on focus lost (only gui) and switching buffers
-" au FocusLost * :wa
-" set autowriteall
 
 let mapleader = ";"
 
 " open .vimrc in splitwindow 
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" keep cursor in position when joining lines
+nnoremap J mzJ`z
+
+" searching/scrolling keeps focus in the middle of the screen 
+set scrolloff=5
+
+" make moving up and down more intuitive with wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " automatically reload vimrc when it's saved
 augroup AutoReloadVimRC
@@ -178,7 +238,7 @@ set mouse-=a
 " use this to paste indented code 
 set pastetoggle=<F2>
 
-" Maps to make handling windows a bit easier
+" Moving/switching/resizing windows/panes around {{{
 
 " pane switcing
 noremap <silent> <C-h> :wincmd h<CR>
@@ -207,39 +267,24 @@ noremap <silent> <leader>cc :close<CR>
 noremap <silent> <leader>cw :cclose<CR>
 
 noremap <silent> <leader>sb :wincmd p<CR>
-noremap <silent> <C-7> <C-W>>
-noremap <silent> <C-8> <C-W>+
-noremap <silent> <C-9> <C-W>+
-noremap <silent> <C-0> <C-W>>
 
+" }}}
 " change working dir to dir of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " AWSOME!!!!
-" mapping to run last run command in last active window
-" so during hacking in vim, simply ;rl and BAM file saved and run in next tmux
+" mapping to run command in active tmux pane
+" so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
 " pane.
-noremap <leader>rl :w<Bar>execute 'silent !tmux send-keys -t .-1 Up C-m'<Bar>redraw!<CR>
+nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
+inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
 
-" remove higlight on space in normal mode 
-nmap <SPACE> <SPACE>:noh<CR>
 
 " even faster access to ack
-nnoremap <leader>a :Ack 
+nnoremap <leader>a :Ack<space>
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-" keep cursor in position when joining lines
-nnoremap J mzJ`z
-
-" searching/scrolling keeps focus in the middle of the screen 
-" nnoremap n nzz
-" nnoremap } }zz
-set scrolloff=5
-
-" make moving up and down more intuitive with wrapped lines
-nnoremap j gj
-nnoremap k gk
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -248,6 +293,7 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 nnoremap <tab> %
 vnoremap <tab> %
 
+" Copy/Pasing with system clipboard {{{
 " CTRL-X and SHIFT-Del are Cut
 vnoremap <C-X>      "+x
 vnoremap <S-Del>    "+x
@@ -259,6 +305,15 @@ vnoremap <C-Insert> "+y
 " CTRL-V and SHIFT-Insert are Paste
 map <C-V>		"+gP
 map <S-Insert>	"+gP
+
+" }}}
+
+" fold mappings
+nnoremap <space> za
+
+" clear search higlight
+nnoremap <bs> :nohlsearch<cr>
+
 " NERDTree options
 " let loaded_nerd_tree=1
 " let NERDTreeQuitOnOpen=1
@@ -279,12 +334,15 @@ augroup clean_comments
     "autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \2/e
 augroup end
 
+" upercase a word 
 nnoremap <leader>u viw~
 
 " clean whitespace at end of lines
-autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup whitespace
+    au!
+    autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup end
 
-let g:syntastic_go_checker="gofmt"
 augroup Go
     au!
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -306,9 +364,21 @@ function! Refresh_firefox()
   endif
 endfunction
 
+" Vim {{{
+
+augroup ft_vim
+    au!
+    au FileType vim setlocal foldmethod=marker
+augroup END
+
+" }}}
+" Abbrevations {{{
+
 ab rigth right
 ab rigth_ right_
 ab _rigth _right
 ab frk Freek Kalter
 ab ccopy Copyright (c) 2013 Freek Kalter
 ab wbs kalteronline.org
+
+" }}}
