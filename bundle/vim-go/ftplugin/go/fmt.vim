@@ -47,4 +47,3 @@ endfunction
 let b:did_ftplugin_go_fmt = 1
 
 " vim:ts=4:sw=4:et
-

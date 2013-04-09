@@ -63,4 +63,3 @@ function! GoIndent(lnum)
 
   return ind
 endfunction
-
