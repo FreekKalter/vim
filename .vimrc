@@ -276,6 +276,10 @@ nnoremap <leader>gs :Gstatus<cr>
 
 " }}}
 
+" Use sane regex matching (magic)
+nnoremap / /\v
+vnoremap / /\v
+
 " change working dir to dir of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
