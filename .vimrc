@@ -368,7 +368,7 @@ endfunction
 augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker
-    au BufWritePost $MYVIMRC source $MYVIMRC
+    au BufWritePost .vimrc source $MYVIMRC
 augroup END
 
 " }}}
