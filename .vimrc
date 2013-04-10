@@ -268,6 +268,14 @@ nnoremap <silent> <leader>p :wincmd p<CR>
 nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
+
+" Fugitive {{{
+
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+
+" }}}
+
 " change working dir to dir of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
