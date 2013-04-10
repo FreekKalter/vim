@@ -66,10 +66,34 @@ set laststatus=2
 set ttyfast
 " apply global substitutions on lines
 set gdefault
+" searching/scrolling keeps focus in the middle of the screen 
+set scrolloff=5
+" set the gui options the way I like
+set guioptions=ac
+set mouse-=a
 
-" save all files on focus lost (only gui) and switching buffers
-" au FocusLost * :wa
-" set autowriteall
+" get rid of the silly characters in window separators
+set fillchars=""
+
+" wild menu {{{
+
+" set wildmenu on
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.snv   " Version control
+
+" }}}
+" Some mappings wich should be default {{{
+" keep cursor in position when joining lines
+nnoremap J mzJ`z
+
+" make moving up and down more intuitive with wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" use this to paste indented code 
+set pastetoggle=<F2>
+" }}}
 " }}}
 " Syntastic {{{
 
@@ -106,6 +130,27 @@ if hostname == "London" && ! has('gui_running')
     au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 endif
 " }}}
+
+" map jk in insert-/command-mode to esc key
+inoremap jk <Esc>
+cnoremap jk <C-c>
+
+let mapleader = ";"
+
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabClosePreviewOnPopupClose = 1
+set completeopt=longest,menuone
+" let g:SuperTabLongestHighlight = 1
+" set complete=.,b,u,]
+
+let g:sparkupNextMapping = '<c-x>'
+
+" clear buffers created by fugitive
+augroup fugitive
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
+
 " Pulse Line {{{
 
 function! s:Pulse() " {{{
@@ -156,31 +201,6 @@ command! -nargs=0 Pulse call s:Pulse()
 
 " }}}
 nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
-
-" map jk in insert-/command-mode to esc key
-inoremap jk <Esc>
-cnoremap jk <C-c>
-
-
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabClosePreviewOnPopupClose = 1
-set completeopt=longest,menuone
-" let g:SuperTabLongestHighlight = 1
-" set complete=.,b,u,]
-
-let g:sparkupNextMapping = '<c-x>'
-
-" clear buffers created by fugitive
-autocmd BufReadPost fugitive://* set bufhidden=delete
-
-" get rid of the silly characters in window separators
-set fillchars=""
-
-" set wildmenu on
-set wildmenu
-set wildmode=list:longest
-set wildignore+=.hg,.git,.snv   " Version control
-
 " Line Return {{{
 
 " Make sure Vim returns to the same line when you reopen a file.
@@ -206,67 +226,46 @@ fun! DoTidy()
 endfun
 
 " shortcut for normal/visual mode to run on entire buffer then return to current line"
-au Filetype perl nmap <F4> :call DoTidy()<CR>
-au Filetype perl vmap <F4> :Tidy<CR>
+augroup perl_tidy
+    au Filetype perl nmap <F4> :call DoTidy()<CR>
+    au Filetype perl vmap <F4> :Tidy<CR>
+augroup END
 
-
-let mapleader = ";"
 
 " open .vimrc in splitwindow 
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
-" keep cursor in position when joining lines
-nnoremap J mzJ`z
-
-" searching/scrolling keeps focus in the middle of the screen 
-set scrolloff=5
-
-" make moving up and down more intuitive with wrapped lines
-nnoremap j gj
-nnoremap k gk
-
-" automatically reload vimrc when it's saved
-augroup AutoReloadVimRC
-  au!
-  au BufWritePost $MYVIMRC so $MYVIMRC
-augroup END
-
-" set the gui options the way I like
-set guioptions=ac
-set mouse-=a
-
-" use this to paste indented code 
-set pastetoggle=<F2>
 
 " Moving/switching/resizing windows/panes around {{{
 
 " pane switcing
-noremap <silent> <C-h> :wincmd h<CR>
-noremap <silent> <C-j> :wincmd j<CR>
-noremap <silent> <C-k> :wincmd k<CR>
-noremap <silent> <C-l> :wincmd l<CR>
+nnoremap <silent> <C-h> :wincmd h<CR>
+nnoremap <silent> <C-j> :wincmd j<CR>
+nnoremap <silent> <C-k> :wincmd k<CR>
+nnoremap <silent> <C-l> :wincmd l<CR>
 
 " pave moving 
-noremap <silent> <leader>L <C-W>L
-noremap <silent> <leader>K <C-W>K
-noremap <silent> <leader>H <C-W>H
-noremap <silent> <leader>J <C-W>J
+nnoremap <silent> <leader>L <C-W>L
+nnoremap <silent> <leader>K <C-W>K
+nnoremap <silent> <leader>H <C-W>H
+nnoremap <silent> <leader>J <C-W>J
 
 " pane resizing 
-noremap <silent> <leader>l :vertical resize +10<CR>
-noremap <silent> <leader>h :vertical resize -10<CR>
-noremap <silent> <leader>j :resize +10<CR>
-noremap <silent> <leader>k :resize -10<CR>
+nnoremap <silent> <leader>l :vertical resize +10<CR>
+nnoremap <silent> <leader>h :vertical resize -10<CR>
+nnoremap <silent> <leader>j :resize +10<CR>
+nnoremap <silent> <leader>k :resize -10<CR>
 
 " pane closing with leader key
-noremap <silent> <leader>cj :wincmd j<CR>:close<CR>
-noremap <silent> <leader>ck :wincmd k<CR>:close<CR>
-noremap <silent> <leader>ch :wincmd h<CR>:close<CR>
-noremap <silent> <leader>cl :wincmd l<CR>:close<CR>
-noremap <silent> <leader>cc :close<CR>
-noremap <silent> <leader>cw :cclose<CR>
+nnoremap <silent> <leader>cj :wincmd j<CR>:close<CR>
+nnoremap <silent> <leader>ck :wincmd k<CR>:close<CR>
+nnoremap <silent> <leader>ch :wincmd h<CR>:close<CR>
+nnoremap <silent> <leader>cl :wincmd l<CR>:close<CR>
+nnoremap <silent> <leader>cc :close<CR>
+nnoremap <silent> <leader>cw :cclose<CR>
 
-noremap <silent> <leader>sb :wincmd p<CR>
+nnoremap <silent> <leader>p :wincmd p<CR>
+nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
 " change working dir to dir of current file
@@ -369,6 +368,7 @@ endfunction
 augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker
+    au BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
 " }}}
