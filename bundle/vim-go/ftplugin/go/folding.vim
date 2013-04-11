@@ -1,58 +1,29 @@
 setlocal foldmethod=expr
-setlocal foldexpr=GetGoFold(v:lnum)
+setlocal foldexpr=GetFoldOnFunction(v:lnum)
 
 function! IndentLevel(lnum)
     return indent(a:lnum) / &shiftwidth
 endfunction
 
-function! NextNonBlankLine(lnum)
-    let numlines = line('$')
-    let current = a:lnum+1
-
-    while current <= numlines
-        if getline(current) =~? '\v\S'
-            return current
-        endif
-
-        let current +=1
-    endwhile
-
-    return -2
-endfunction
-
-function! PrevNonBlankLine(lnum)
-    let numlines = line(0)
-    let current = a:lnum-1
-
-    while current >= numlines
-        if getline(current) =~? '\v\S'
-            return current
-        endif
-
-        let current -=1
-    endwhile
-
-    return -2
-endfunction
-
-function! GetGoFold(lnum)
+" Simple fold expression to fold functions and
+" groups of vars,types and consts
+function! GetFoldOnFunction(lnum)
     if getline(a:lnum) =~? '\v^\s*$'
-        return '-1'
+        if IndentLevel(a:lnum-1) != 0 
+            return '1'
+        endif
+        return '0'
     endif
 
-    let this_indent= IndentLevel(a:lnum)
-    let next_indent= IndentLevel(NextNonBlankLine(a:lnum))
-    let prev_indent= IndentLevel(PrevNonBlankLine(a:lnum))
+    if getline(a:lnum) =~? '\v^(func|var|type|const)' || getline(a:lnum) =~? '\v^import'
+        return ">1"
+    endif
 
-    if next_indent == this_indent
-        if prev_indent > this_indent && getline(a:lnum) =~? '\v^}'
-            return prev_indent
-        else
-            return this_indent
-        endif
-    elseif next_indent < this_indent
-        return this_indent
-    elseif next_indent > this_indent 
-        return '>' . next_indent 
+    if IndentLevel(a:lnum) == 0 && if getline(a:lnum) =~? '\v^(})|(\))$' && foldlevel(a:lnum-1) > 1
+        return '1'
+    endif
+
+    if foldlevel(a:lnum-1) >= 1
+        return '1'
     endif
 endfunction
