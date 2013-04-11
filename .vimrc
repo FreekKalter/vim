@@ -88,7 +88,11 @@ set autowrite
 set autoread
 set title
 
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
 set notimeout
+set ttimeout
+set ttimeoutlen=10
 
 " Backups {{{
 set backup
@@ -97,6 +101,9 @@ set noswapfile
 set undodir=~/.vim/tmp/undo// " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap// " swap files
+
+" Make Vim able to edit crontab files again.
+set backupskip=/tmp/*,/private/tmp/*"
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
@@ -108,6 +115,7 @@ endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
+
 " }}}
 
 " wild menu {{{
@@ -141,7 +149,6 @@ let g:syntastic_perl_lib_path = './lib'
 let g:syntastic_go_checker="gofmt"
 
 " }}}
-
 " Visual stuff {{{
 " colorscheme
 set background=dark
@@ -169,11 +176,53 @@ if hostname == "London" && ! has('gui_running')
 endif
 " }}}
 
+" Mappings {{{
+
 " map jk in insert-/command-mode to esc key
 inoremap jk <Esc>
 cnoremap jk <C-c>
 
 let mapleader = ";"
+
+nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
+
+" Use sane regex matching (magic)
+nnoremap / /\v
+vnoremap / /\v
+
+nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+
+" change working dir to dir of current file
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" AWSOME!!!!
+" mapping to run command in active tmux pane
+" so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
+" pane.
+nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
+inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR> 
+
+" even faster access to ack
+nnoremap <leader>a :Ack<space>
+
+nnoremap <leader>m :silent make\|redraw!\|cc<CR>
+
+" use tab to find matching brackets
+nnoremap <tab> %
+vnoremap <tab> %
+
+" fold mappings
+nnoremap <space> za
+
+" clear search higlight
+nnoremap <bs> :nohlsearch<cr>
+
+" upercase a word 
+nnoremap <leader>u viw~
+
+
+" }}}
 
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -183,12 +232,18 @@ set completeopt=longest,menuone
 
 let g:sparkupNextMapping = '<c-x>'
 
+" Fugitive {{{
+
 " clear buffers created by fugitive
 augroup fugitive
     au!
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+
+" }}}
 " Pulse Line {{{
 
 function! s:Pulse() " {{{
@@ -292,8 +347,6 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
 " }}}
 " }}}
-
-nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 " Line Return {{{
 
 " Make sure Vim returns to the same line when you reopen a file.
@@ -364,41 +417,9 @@ nnoremap <silent> <leader>p :wincmd p<CR>
 nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
-" Fugitive {{{
-
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
-
-" }}}
-
-" Use sane regex matching (magic)
-nnoremap / /\v
-vnoremap / /\v
-
-nnoremap ! :Clam<space>
-vnoremap ! :ClamVisual<space>
-
-" change working dir to dir of current file
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-
-" AWSOME!!!!
-" mapping to run command in active tmux pane
-" so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
-" pane.
-nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
-inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR> 
-
-" even faster access to ack
-nnoremap <leader>a :Ack<space>
-
-nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-
-" use tab to find matching brackets
-nnoremap <tab> %
-vnoremap <tab> %
 
 " Copy/Pasing with system clipboard {{{
 " CTRL-X and SHIFT-Del are Cut
@@ -414,17 +435,7 @@ nnoremap <C-P>		"+gP
 inoremap <C-P>		<esc>"+gpi
 
 " }}}
-
-" fold mappings
-nnoremap <space> za
-
-" clear search higlight
-nnoremap <bs> :nohlsearch<cr>
-
-" upercase a word 
-nnoremap <leader>u viw~
-
-" NERDTree options
+" NERDTree {{{
 " let loaded_nerd_tree=1
 " let NERDTreeQuitOnOpen=1
 
@@ -435,6 +446,7 @@ let NERDTreeHijackNetrw=1
 " NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
+" }}}
 " Tidying up {{{
 " clean comments, space after comment char
 augroup clean_comments
@@ -457,7 +469,6 @@ augroup Go
 augroup END
 
 " }}}
-    
 " Refresh firefox on saving website related documents {{{
 " Requires mozrepl firefox plugin
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
