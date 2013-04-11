@@ -230,6 +230,15 @@ nnoremap <leader>u viw~
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " }}}
+" Fugitive {{{
+
+" clear buffers created by fugitive
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+
+" }}}
 " Completion {{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -238,18 +247,6 @@ set completeopt=longest,menuone
 " set complete=.,b,u,]
 
 let g:sparkupNextMapping = '<c-x>'
-
-" }}}
-" Fugitive {{{
-
-" clear buffers created by fugitive
-augroup fugitive
-    au!
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
-
-nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
 
 " }}}
 " Pulse Line {{{
