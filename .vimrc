@@ -464,8 +464,8 @@ augroup whitespace
 augroup end
 
 augroup Go
-    au!
-    autocmd FileType go autocmd BufWritePre <buffer> Fmt
+  au!
+  autocmd FileType go autocmd BufWritePre <buffer> execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
 augroup END
 
 " }}}
