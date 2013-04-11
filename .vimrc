@@ -14,8 +14,8 @@ filetype indent plugin on
 set nocompatible
 
 " }}}
-
 " Basic vim settings {{{
+
 " Turn on that syntax highlighting
 syntax enable
 
@@ -24,7 +24,6 @@ set undofile
 set undoreload=10000
 set lazyredraw
 set splitright
-set splitbelow
 set history=1000
 " always show status line
 set laststatus=2
@@ -90,9 +89,9 @@ set title
 
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
-set notimeout
-set ttimeout
-set ttimeoutlen=10
+" set notimeout
+" set ttimeout
+" set ttimeoutlen=10
 
 " Backups {{{
 set backup
@@ -146,7 +145,6 @@ set pastetoggle=<F2>
 let g:syntastic_auto_loc_list=1 
 let g:syntastic_auto_jump=1 
 let g:syntastic_perl_lib_path = './lib'
-let g:syntastic_go_checker="gofmt"
 
 " }}}
 " Visual stuff {{{
@@ -155,7 +153,7 @@ set background=dark
 autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
 
 if has('gui_running')
-    colorscheme codeschool
+    colorscheme jellybeans
     set guifont=DejaVu\ Sans\ Mono\ 10
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
@@ -175,7 +173,6 @@ if hostname == "London" && ! has('gui_running')
     au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
 endif
 " }}}
-
 " Mappings {{{
 
 " map jk in insert-/command-mode to esc key
@@ -190,6 +187,9 @@ nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 nnoremap / /\v
 vnoremap / /\v
 
+" Open help in vertical split
+command! -nargs=* -complete=help H vertical belowright help <args>
+
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
 
@@ -202,6 +202,11 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " pane.
 nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
 inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR> 
+
+nnoremap Q <nop>
+
+nnoremap , `
+nnoremap ,, `'
 
 " even faster access to ack
 nnoremap <leader>a :Ack<space>
@@ -221,9 +226,11 @@ nnoremap <bs> :nohlsearch<cr>
 " upercase a word 
 nnoremap <leader>u viw~
 
+" writing a file as root
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " }}}
-
+" Completion {{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 set completeopt=longest,menuone
@@ -232,6 +239,7 @@ set completeopt=longest,menuone
 
 let g:sparkupNextMapping = '<c-x>'
 
+" }}}
 " Fugitive {{{
 
 " clear buffers created by fugitive
@@ -417,14 +425,7 @@ nnoremap <silent> <leader>p :wincmd p<CR>
 nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
-
-" writing a file as root
-command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
-
 " Copy/Pasing with system clipboard {{{
-" CTRL-X and SHIFT-Del are Cut
-vnoremap <C-X>      "+x
-vnoremap <S-Del>    "+x
 
 " CTRL-C and CTRL-Insert are Copy
 vnoremap <C-C>      "+y
