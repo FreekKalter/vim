@@ -2,21 +2,32 @@
 " Licensed under revised BSD license. See LICENSE file.
 "
 " based on Derek Wyats original vimrc (and awsome videos)
+" lots of inspiration (read copied) from Steve Losh
 
-" Forget being compatible with good ol' vi
-set nocompatible
+" Preamble {{{
+
+filetype on
 " call pathogen to mangage runtime paths
 call pathogen#infect()
+filetype indent plugin on
+" Forget being compatible with good ol' vi
+set nocompatible
+
+" }}}
 
 " Basic vim settings {{{
 " Turn on that syntax highlighting
 syntax enable
-" Get that filetype stuff happening
-filetype on
-filetype plugin on
-filetype indent on
 
 set encoding=utf-8
+set undofile
+set undoreload=10000
+set lazyredraw
+set splitright
+set splitbelow
+set history=1000
+" always show status line
+set laststatus=2
 " Why is this not a default (allow hidden buffers)
 set hidden
 " higlight search pattern
@@ -51,8 +62,7 @@ set ch=2
 set number
 " highlight current line
 set cursorline
-" set visual bell -- i hate that damned beeping
-set vb
+set visualbell
 " virtual edit: move the cursor on invalid empty space
 set virtualedit=all
 
@@ -73,7 +83,32 @@ set guioptions=ac
 set mouse-=a
 
 " get rid of the silly characters in window separators
-set fillchars=""
+set fillchars=diff:⣿,vert:│
+set autowrite
+set autoread
+set title
+
+set notimeout
+
+" Backups {{{
+set backup
+set noswapfile
+
+set undodir=~/.vim/tmp/undo// " undo files
+set backupdir=~/.vim/tmp/backup// " backups
+set directory=~/.vim/tmp/swap// " swap files
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+" }}}
 
 " wild menu {{{
 
@@ -87,6 +122,9 @@ set wildignore+=.hg,.git,.snv   " Version control
 " keep cursor in position when joining lines
 nnoremap J mzJ`z
 
+" Join line above current line behind current line
+" mainly for joining short comments above a line 
+nnoremap JJ mzk^dg_j$lpkdd`z
 " make moving up and down more intuitive with wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -147,9 +185,9 @@ let g:sparkupNextMapping = '<c-x>'
 
 " clear buffers created by fugitive
 augroup fugitive
+    au!
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
-
 
 " Pulse Line {{{
 
@@ -200,6 +238,61 @@ endfunction " }}}
 command! -nargs=0 Pulse call s:Pulse()
 
 " }}}
+" Highlight Word {{{
+"
+" This mini-plugin provides a few mappings for highlighting words temporarily.
+"
+" Sometimes you're looking at a hairy piece of code and would like a certain
+" word or two to stand out temporarily. You can search for it, but that only
+" gives you one color of highlighting. Now you can use <leader>N where N is
+" a number from 1-6 to highlight the current word in a specific color.
+
+function! HiInterestingWord(n) " {{{
+" Save our location.
+    normal! mz
+
+" Yank the current word into the z register.
+    normal! "zyiw
+
+" Calculate an arbitrary match ID. Hopefully nothing else is using it.
+    let mid = 86750 + a:n
+
+" Clear existing matches, but don't worry if they don't exist.
+    silent! call matchdelete(mid)
+
+" Construct a literal pattern that has to match at boundaries.
+    let pat = '\V\<' . escape(@z, '\') . '\>'
+
+" Actually match the words.
+    call matchadd("InterestingWord" . a:n, pat, 1, mid)
+
+" Move back to our original location.
+    normal! `z
+endfunction " }}}
+
+" Mappings {{{
+
+nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
+nnoremap <silent> <leader>C :call clearmatches()<cr>
+
+" }}}
+" Default Highlights {{{
+
+hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
+hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
+hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
+hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
+hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
+hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
+
+" }}}
+" }}}
+
 nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 " Line Return {{{
 
@@ -214,6 +307,7 @@ augroup line_return
 augroup END
 
 " }}}
+" Perl stuff {{{
 
 " define :Tidy command to run perltidy on visual selection || entire buffer"
 command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
@@ -227,15 +321,12 @@ endfun
 
 " shortcut for normal/visual mode to run on entire buffer then return to current line"
 augroup perl_tidy
+    au!
     au Filetype perl nmap <F4> :call DoTidy()<CR>
     au Filetype perl vmap <F4> :Tidy<CR>
 augroup END
 
-
-" open .vimrc in splitwindow 
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
-
-
+" }}}
 " Moving/switching/resizing windows/panes around {{{
 
 " pane switcing
@@ -243,6 +334,11 @@ nnoremap <silent> <C-h> :wincmd h<CR>
 nnoremap <silent> <C-j> :wincmd j<CR>
 nnoremap <silent> <C-k> :wincmd k<CR>
 nnoremap <silent> <C-l> :wincmd l<CR>
+
+inoremap <silent> <C-h> <esc>:wincmd h<CR>
+inoremap <silent> <C-j> <esc>:wincmd j<CR>
+inoremap <silent> <C-k> <esc>:wincmd k<CR>
+inoremap <silent> <C-l> <esc>:wincmd l<CR>
 
 " pave moving 
 nnoremap <silent> <leader>L <C-W>L
@@ -268,7 +364,6 @@ nnoremap <silent> <leader>p :wincmd p<CR>
 nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
-
 " Fugitive {{{
 
 nnoremap <leader>gd :Gdiff<cr>
@@ -280,6 +375,9 @@ nnoremap <leader>gs :Gstatus<cr>
 nnoremap / /\v
 vnoremap / /\v
 
+nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+
 " change working dir to dir of current file
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
@@ -288,14 +386,12 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
 " pane.
 nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
-inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
-
+inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR> 
 
 " even faster access to ack
 nnoremap <leader>a :Ack<space>
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
-
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
@@ -314,8 +410,8 @@ vnoremap <C-C>      "+y
 vnoremap <C-Insert> "+y
 
 " CTRL-V and SHIFT-Insert are Paste
-map <C-V>		"+gP
-map <S-Insert>	"+gP
+nnoremap <C-P>		"+gP
+inoremap <C-P>		<esc>"+gpi
 
 " }}}
 
@@ -324,6 +420,9 @@ nnoremap <space> za
 
 " clear search higlight
 nnoremap <bs> :nohlsearch<cr>
+
+" upercase a word 
+nnoremap <leader>u viw~
 
 " NERDTree options
 " let loaded_nerd_tree=1
@@ -336,17 +435,15 @@ let NERDTreeHijackNetrw=1
 " NERDTREE file filters
 let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
 
+" Tidying up {{{
 " clean comments, space after comment char
 augroup clean_comments
     " e flag is to surpress error message if pattern is not found
     autocmd!
-    autocmd FileType vim autocmd BufWritePre <buffer> :%s/^"\(\w\)/" \1/e
-    autocmd FileType zsh autocmd BufWritePre <buffer> :%s/^#\(\w\)/# \2/e
+    autocmd FileType vim autocmd BufWritePre <buffer> :%s/\v^"(\S)/" \1/e
+    autocmd FileType zsh autocmd BufWritePre <buffer> :%s/\v^#(\S)/# \1/e
     "autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \2/e
 augroup end
-
-" upercase a word 
-nnoremap <leader>u viw~
 
 " clean whitespace at end of lines
 augroup whitespace
@@ -358,9 +455,10 @@ augroup Go
     au!
     autocmd FileType go autocmd BufWritePre <buffer> Fmt
 augroup END
-    
 
-" Refresh firefox on saving website related documents
+" }}}
+    
+" Refresh firefox on saving website related documents {{{
 " Requires mozrepl firefox plugin
 autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
 function! Refresh_firefox()
@@ -375,7 +473,11 @@ function! Refresh_firefox()
   endif
 endfunction
 
-" Vim {{{
+" }}}
+" Vim hacking mappings and stuff {{{
+
+" open .vimrc in splitwindow 
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 
 augroup ft_vim
     au!
