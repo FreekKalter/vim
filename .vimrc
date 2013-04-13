@@ -23,7 +23,6 @@ set encoding=utf-8
 set undofile
 set undoreload=10000
 set lazyredraw
-set splitright
 set history=1000
 " always show status line
 set laststatus=2
@@ -228,6 +227,26 @@ nnoremap <leader>u viw~
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
+vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+function! s:GrepOperator(type)
+    let saved_unnamed_register = @@
+
+    if a:type ==# 'v'
+        normal! `<v`>y
+    elseif a:type ==# 'char'
+        normal! `[v`]y
+    else
+        return
+    endif
+
+    silent execute "Ack " . shellescape(@@) . " ."
+    copen
+
+    let @@ = saved_unnamed_register
+endfunction
 
 " }}}
 " Fugitive {{{
