@@ -514,6 +514,32 @@ augroup ft_vim
 augroup END
 
 " }}}
+" zsh_alias folding {{{
+augroup Zsh_alias
+    au!
+    autocmd FileType zsh setlocal foldmethod=expr foldexpr=GetZshAliasFold(v:lnum)
+augroup END
+
+" or maybe just use marks 
+function! GetZshAliasFold(lnum)
+    if getline(a:lnum) =~? '\v^\s*$'
+        return '0'
+    endif
+
+    if getline(a:lnum) =~? '\v^\s*#'
+        if foldlevel(a:lnum-1) > 0
+            return '1'
+        endif
+        return '>1'
+    endif
+
+    if foldlevel(a:lnum) < foldlevel(a:lnum-1) && getline(a:lnum) !~? '\v^\s*$'
+        return '1'
+    endif
+
+    return '0'
+endfunction
+" }}}
 " Abbrevations {{{
 
 ab rigth right
