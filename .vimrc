@@ -502,10 +502,10 @@ function! Refresh_firefox()
 endfunction
 
 " }}}
-" Vim hacking mappings and stuff {{{
+" Quick dot-file hacking mappings and stuff {{{
 
 " open .vimrc in splitwindow 
-nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vim/.vimrc<cr>
 
 augroup ft_vim
     au!
