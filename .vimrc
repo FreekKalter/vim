@@ -212,10 +212,6 @@ nnoremap <leader>a :Ack<space>
 
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-" use tab to find matching brackets
-nnoremap <tab> %
-vnoremap <tab> %
-
 " fold mappings
 nnoremap <space> za
 
