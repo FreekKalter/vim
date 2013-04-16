@@ -20,8 +20,6 @@ set nocompatible
 syntax enable
 
 set encoding=utf-8
-set undofile
-set undoreload=10000
 set lazyredraw
 set history=1000
 " always show status line
