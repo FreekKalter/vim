@@ -502,6 +502,8 @@ endfunction
 
 " open .vimrc in splitwindow 
 nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vim/.vimrc<cr>
+nnoremap <leader>ea <C-w><C-v><C-l>:e ~/github/zsh-conf/.zsh_aliases<cr>
+nnoremap <leader>ez <C-w><C-v><C-l>:e ~/github/zsh-conf/.zshrc<cr>
 
 augroup ft_vim
     au!
