@@ -82,6 +82,7 @@ set mouse-=a
 set fillchars=diff:⣿,vert:│
 set autowrite
 set autoread
+set autochdir
 set title
 
 set sessionoptions+=resize,winpos
