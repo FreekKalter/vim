@@ -541,6 +541,13 @@ function! GetZshAliasFold(lnum)
     return '0'
 endfunction
 " }}}
+" Tab navigation {{{
+
+nnoremap <C-tab> gt
+nnoremap <leader>t :tabnew<cr>
+nnoremap <leader>ct :tabclose<cr>
+
+" }}}
 " Abbrevations {{{
 
 ab rigth right
