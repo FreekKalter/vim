@@ -220,6 +220,10 @@ nnoremap <bs> :nohlsearch<cr>
 " upercase a word 
 nnoremap <leader>u viw~
 
+" Create empty line above/below current from normal mode
+nnoremap <leader>o mzo<esc>`z
+nnoremap <leader>O mzO<esc>`z
+
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
