@@ -86,6 +86,7 @@ set autowrite
 set autoread
 set title
 
+set sessionoptions+=resize,winpos
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
 " set notimeout
