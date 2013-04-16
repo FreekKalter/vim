@@ -443,8 +443,8 @@ vnoremap <C-C>      "+y
 vnoremap <C-Insert> "+y
 
 " CTRL-V and SHIFT-Insert are Paste
-nnoremap <C-P>		"+gP
-inoremap <C-P>		<esc>"+gpi
+nnoremap <C-B>		"+gP
+inoremap <C-B>		<esc>"+gpi
 
 " }}}
 " NERDTree {{{
