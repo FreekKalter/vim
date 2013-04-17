@@ -437,7 +437,8 @@ nnoremap <silent> <leader>cl :wincmd l<CR>:close<CR>
 nnoremap <silent> <leader>cc :close<CR>
 nnoremap <silent> <leader>cw :cclose<CR>
 
-nnoremap <silent> <leader>p :wincmd p<CR>
+" quick switch between last active pane
+nnoremap <silent> <leader>q :wincmd p<CR>
 nnoremap <silent> <leader>s :b#<CR>
 
 " }}}
