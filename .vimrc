@@ -6,7 +6,9 @@
 
 " Preamble {{{
 
+runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
+
 filetype on
 " call pathogen to mangage runtime paths
 filetype indent plugin on
