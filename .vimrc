@@ -6,9 +6,9 @@
 
 " Preamble {{{
 
+call pathogen#infect()
 filetype on
 " call pathogen to mangage runtime paths
-call pathogen#infect()
 filetype indent plugin on
 " Forget being compatible with good ol' vi
 set nocompatible
