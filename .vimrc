@@ -96,7 +96,6 @@ set sessionoptions+=resize,winpos
 set backup
 set noswapfile
 
-set undodir=~/.vim/tmp/undo// " undo files
 set backupdir=~/.vim/tmp/backup// " backups
 set directory=~/.vim/tmp/swap// " swap files
 
@@ -104,9 +103,6 @@ set directory=~/.vim/tmp/swap// " swap files
 set backupskip=/tmp/*,/private/tmp/*"
 
 " Make those folders automatically if they don't already exist.
-if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
-endif
 if !isdirectory(expand(&backupdir))
     call mkdir(expand(&backupdir), "p")
 endif
