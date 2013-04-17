@@ -120,20 +120,6 @@ set wildmode=list:longest
 set wildignore+=.hg,.git,.snv   " Version control
 
 " }}}
-" Some mappings wich should be default {{{
-" keep cursor in position when joining lines
-nnoremap J mzJ`z
-
-" Join line above current line behind current line
-" mainly for joining short comments above a line 
-nnoremap JJ mzk^dg_j$lpkdd`z
-" make moving up and down more intuitive with wrapped lines
-nnoremap j gj
-nnoremap k gk
-
-" use this to paste indented code 
-set pastetoggle=<F2>
-" }}}
 " }}}
 " Syntastic {{{
 
@@ -169,6 +155,24 @@ if hostname == "London" && ! has('gui_running')
 endif
 " }}}
 " Mappings {{{
+
+" Some mappings wich should be default {{{
+" keep cursor in position when joining lines
+nnoremap J mzJ`z
+
+" Join line above current line behind current line
+" mainly for joining short comments above a line 
+nnoremap JJ mzk^dg_j$lpkdd`z
+" make moving up and down more intuitive with wrapped lines
+nnoremap j gj
+nnoremap k gk
+
+" use this to paste indented code 
+set pastetoggle=<F2>
+
+nnoremap Y y$
+
+" }}}
 
 " map jk in insert-/command-mode to esc key
 inoremap jk <Esc>
@@ -466,8 +470,7 @@ augroup clean_comments
     " e flag is to surpress error message if pattern is not found
     autocmd!
     autocmd FileType vim autocmd BufWritePre <buffer> :%s/\v^"(\S)/" \1/e
-    autocmd FileType zsh autocmd BufWritePre <buffer> :%s/\v^#(\S)/# \1/e
-    "autocmd FileType go autocmd BufWritePre <buffer> :%s/^\/\/\(\w\)/\/\/ \2/e
+    autocmd FileType zsh autocmd BufWritePre <buffer> :%s/\v^(#+)([^#[:space:]])/\1 \2/e
 augroup end
 
 " clean whitespace at end of lines
