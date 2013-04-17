@@ -133,10 +133,10 @@ let g:syntastic_perl_lib_path = './lib'
 " Visual stuff {{{
 " colorscheme
 set background=dark
-autocmd VimEnter * :SetColors codeschool jellybeans grb256 distinguishd
+autocmd VimEnter * :SetColors codeschool jellybeans pyte grb256 distinguishd ironman summerfruit256 simpleandfriendly
 
 if has('gui_running')
-    colorscheme jellybeans
+    colorscheme ironman
     set guifont=DejaVu\ Sans\ Mono\ 10
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
