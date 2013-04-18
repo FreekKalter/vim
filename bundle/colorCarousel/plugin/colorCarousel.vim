@@ -1,8 +1,8 @@
 
-function! NextColor( light )
+function! NextColor( method )
     
     if exists('g:colors_name')
-        if a:light == 1
+        if a:method == 'light'
             let l:current = index(g:lightColorCarousel, g:colors_name)
         else
             let l:current = index(g:darkColorCarousel, g:colors_name)
@@ -12,13 +12,13 @@ function! NextColor( light )
     endif
 
     let l:current += 1
-    if a:light ==1
-        if l:current >= len(g:lightColorCarousel)-1
+    if a:method=='light'
+        if l:current > len(g:lightColorCarousel)-1
             let l:current = 0
         endif
         execute 'colorscheme ' .  g:lightColorCarousel[l:current]
     else
-        if l:current >= len(g:darkColorCarousel)-1
+        if l:current > len(g:darkColorCarousel)-1
             let l:current = 0
         endif
         execute 'colorscheme ' .  g:darkColorCarousel[l:current]

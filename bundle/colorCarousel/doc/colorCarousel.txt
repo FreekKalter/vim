@@ -1,0 +1,36 @@
+*colorCarousel.txt* easily switch between a set of dark and light colorschemes
+
+==============================================================================
+CONTENT                                             *colorCarousel-contents*
+
+1. Usage        |colorCarouselUsage|
+2. Mappings     |colorCarouselMappings|
+3. License      |colorCarouselLicencse|
+
+==============================================================================
+Section 1: Usage                                        *colorCarouselUsage*
+
+With this plugin you can cycle quickly through two list of colorschemes, one
+with dark ones and one with lights.
+The supplied function `NextColor()` does the switching. Call
+NextColor('light') to switch to the next light colorscheme. Call the same
+function with 'dark' to cycle through the dark ones.
+
+==============================================================================
+Section 2: Mappings                                 *colorCarouselMappings*
+
+You can map the the function like this: > 
+
+    nnoremap <F8> :call NextColor('light')<cr>
+    nnoremap <F9> :call NextColor('dark')<cr>
+
+This maps cycling throug light colorschemes to <F8>. And maps <F9> to the dark
+ones.
+
+==============================================================================
+Section 3: License                                  *colorCarouselMappings*
+
+Copyright (c) 2013 Freek Kalter 
+Use of this source code is governed by the "Revised BSD License" that can be
+found in the LICENSE file. 
+
