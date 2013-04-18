@@ -582,8 +582,11 @@ augroup END
 ab rigth right
 ab rigth_ right_
 ab _rigth _right
+ab ligth light
 ab frk Freek Kalter
 ab ccopy Copyright (c) 2013 Freek Kalter
+ab cbsd Use of this source code is governed by the "Revised BSD License" that can be found in the LICENSE file.
 ab wbs kalteronline.org
+ab === ==============================================================================
 
 " }}}
