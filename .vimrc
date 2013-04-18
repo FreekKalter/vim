@@ -43,6 +43,8 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set autoindent
+set smarttab
+set showmatch
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
 
@@ -87,6 +89,7 @@ set autoread
 set autochdir
 set title
 
+set colorcolumn=+1
 set sessionoptions+=resize,winpos
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -139,7 +142,7 @@ let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' , 'distinguis
 
 
 if has('gui_running')
-    colorscheme ironman
+    colorscheme summerfruit256
     set guifont=DejaVu\ Sans\ Mono\ 10
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
