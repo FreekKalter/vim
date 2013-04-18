@@ -133,7 +133,10 @@ let g:syntastic_perl_lib_path = './lib'
 " Visual stuff {{{
 " colorscheme
 set background=dark
-autocmd VimEnter * :SetColors codeschool jellybeans pyte grb256 distinguishd ironman summerfruit256 simpleandfriendly
+" <F8> cycle throug light scheme     <F9> cycle throug dark schemes
+let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' , 'simpleandfriendly' ]
+let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' , 'distinguishd' ]
+
 
 if has('gui_running')
     colorscheme ironman
