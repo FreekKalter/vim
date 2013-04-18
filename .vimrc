@@ -233,6 +233,19 @@ nnoremap <leader>u viw~
 nnoremap <leader>o mzo<esc>`z
 nnoremap <leader>O mzO<esc>`z
 
+" toggle between help and text filetype
+nnoremap <leader>hh :call ToggleHelpSyntax()<cr>
+
+function! ToggleHelpSyntax ()
+    if &filetype == 'help'
+        echom 'help to text'
+        set filetype=text
+    elseif &filetype == 'text'
+        echom 'text to help '
+        set filetype=help
+    endif
+endfunction
+
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
@@ -555,6 +568,13 @@ endfunction
 nnoremap <C-tab> gt
 nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>ct :tabclose<cr>
+
+" }}}
+" Help files {{{
+augroup helpfiles
+    au! 
+    autocmd FileType help,text setlocal textwidth=78
+augroup END
 
 " }}}
 " Abbrevations {{{
