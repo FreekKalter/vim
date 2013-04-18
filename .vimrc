@@ -195,7 +195,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Open help in vertical split
-command! -nargs=* -complete=help H vertical belowright help <args>
+command! -nargs=* -complete=help H vertical belowright help <args><cr>:vertical resize 80
 
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
