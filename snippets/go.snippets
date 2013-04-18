@@ -1,0 +1,39 @@
+snippet if
+	if ${1} {
+		${2://code}
+	}
+
+snippet el
+	else{
+		${1://code}
+	}
+
+snippet ifel
+	if ${1} {
+		${2://code}
+	} else {
+		${3://code}
+	}
+
+snippet imp
+	import (
+		"${1}"
+	)
+
+snippet func
+	func (${1}){
+		${2://code}
+	}
+
+snippet met
+	func (${1:/*object*/}) ${2:/*funcname*/} {
+		${3://code}
+	}
+
+snippet pr
+	fmt.Println(${1})
+
+snippet fpr
+	fmt.Fprintf(${1}, ${2})
+
+	
