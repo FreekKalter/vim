@@ -1,32 +1,36 @@
 
+let s:currentLight = -1
+let s:currentDark = -1
 function! NextColor( method )
-    
-    if exists('g:colors_name')
-        if a:method == 'light'
-            let l:current = index(g:lightColorCarousel, g:colors_name)
-        else
-            let l:current = index(g:darkColorCarousel, g:colors_name)
+    if a:method == 'light'
+        if s:currentLight == -1
+            let s:currentLight = 0
+        elseif index(g:lightColorCarousel, g:colors_name) != -1 " current color is light
+            let s:currentLight += 1
         endif
     else
-        let l:current = 0
+        if s:currentDark == -1
+            let s:currentDark = 0
+        elseif index(g:darkColorCarousel, g:colors_name) != -1 " current color is dark
+            let s:currentDark += 1
+        endif
     endif
 
-    let l:current += 1
     if a:method=='light'
-        if l:current > len(g:lightColorCarousel)-1
-            let l:current = 0
+        if s:currentLight > len(g:lightColorCarousel)-1
+            let s:currentLight = 0
         endif
-        execute 'colorscheme ' .  g:lightColorCarousel[l:current]
+        execute 'colorscheme ' .  g:lightColorCarousel[s:currentLight]
     else
-        if l:current > len(g:darkColorCarousel)-1
-            let l:current = 0
+        if s:currentDark > len(g:darkColorCarousel)-1
+            let s:currentDark = 0
         endif
-        execute 'colorscheme ' .  g:darkColorCarousel[l:current]
+        execute 'colorscheme ' .  g:darkColorCarousel[s:currentDark]
     endif
 
     redraw
     echo g:colors_name
 endfunction
 
-noremap <F8> :call NextColor(1)<cr>
-noremap <F9> :call NextColor(0)<cr>
+noremap <F8> :call NextColor('light')<cr>
+noremap <F9> :call NextColor('dark')<cr>
