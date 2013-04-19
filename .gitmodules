@@ -13,3 +13,9 @@
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "bundle/colors-distinguished"]
+	path = bundle/colors-distinguished
+	url = https://github.com/Lokaltog/vim-distinguished.git
+[submodule "bundle/easymotion"]
+	path = bundle/easymotion
+	url = https://github.com/Lokaltog/vim-easymotion.git
