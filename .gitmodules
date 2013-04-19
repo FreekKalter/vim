@@ -25,3 +25,12 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/markdown-folding"]
+	path = bundle/markdown-folding
+	url = https://github.com/nelstrom/vim-markdown-folding.git
+[submodule "bundle/instant-markdown"]
+	path = bundle/instant-markdown
+	url = https://github.com/suan/vim-instant-markdown.git
