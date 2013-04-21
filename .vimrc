@@ -90,7 +90,8 @@ set autochdir
 set title
 
 set colorcolumn=+1
-set sessionoptions+=resize,winpos
+set sessionoptions+=resize,winpos,globals
+set viminfo+=!
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
 " set notimeout
@@ -137,12 +138,18 @@ let g:syntastic_perl_lib_path = './lib'
 " colorscheme
 set background=dark
 " <F8> cycle throug light scheme     <F9> cycle throug dark schemes
-let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' , 'simpleandfriendly' ]
-let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' , 'distinguishd' ]
-
+let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
+                            \ 'simpleandfriendly' ]
+let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
+                            \'distinguished' ]
+" set the colorscheme used in last session
+autocmd VimEnter * execute 'colorscheme ' . g:CURRENTCOLOR
+" keep current colorscheme when reloading vimrc
+if exists("g:CURRENTCOLOR") == 1
+   execute 'colorscheme ' . g:CURRENTCOLOR
+endif
 
 if has('gui_running')
-    colorscheme summerfruit256
     set guifont=DejaVu\ Sans\ Mono\ 10
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
