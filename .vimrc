@@ -164,9 +164,15 @@ let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
    
 if hostname == "London" && ! has('gui_running')
-    au InsertEnter * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/' ~/.config/Terminal/terminalrc"
-    au InsertLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
-    au VimLeave * silent execute "!sed -i.bak -e 's/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' ~/.config/Terminal/terminalrc"
+    au InsertEnter * silent execute "!sed -i.bak -e 
+        \'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
+        \~/.config/Terminal/terminalrc"
+    au InsertLeave * silent execute "!sed -i.bak -e 
+        \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' 
+        \~/.config/Terminal/terminalrc"
+    au VimLeave * silent execute "!sed -i.bak -e 
+        \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' 
+        \~/.config/Terminal/terminalrc"
 endif
 " }}}
 " Mappings {{{
@@ -202,7 +208,7 @@ nnoremap / /\v
 vnoremap / /\v
 
 " Open help in vertical split
-command! -nargs=* -complete=help H vertical belowright help <args><cr>:vertical resize 80
+command! -nargs=* -complete=help H vertical topleft help <args><cr>:vertical resize 80
 
 nnoremap ! :Clam<space>
 vnoremap ! :ClamVisual<space>
@@ -510,13 +516,15 @@ augroup end
 
 augroup Go
   au!
-  autocmd FileType go autocmd BufWritePre <buffer> execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
+  autocmd FileType go autocmd BufWritePre <buffer> 
+    \execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
 augroup END
 
 " }}}
 " Refresh firefox on saving website related documents {{{
 " Requires mozrepl firefox plugin
-autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  :call Refresh_firefox()
+autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  
+            \:call Refresh_firefox()
 function! Refresh_firefox()
   if &modified
     write
@@ -592,8 +600,10 @@ ab _rigth _right
 ab ligth light
 ab frk Freek Kalter
 ab ccopy Copyright (c) 2013 Freek Kalter
-ab cbsd Use of this source code is governed by the "Revised BSD License" that can be found in the LICENSE file.
+ab cbsd Use of this source code is governed by the "Revised BSD License"
+            \that can be found in the LICENSE file.
 ab wbs kalteronline.org
-ab === ==============================================================================
+ab === ===================================================================
+    \===========
 
 " }}}
