@@ -55,3 +55,6 @@
 [submodule "bundle/colorCarousel"]
 	path = bundle/colorCarousel
 	url = git@github.com:FreekKalter/vim-colorCarousel.git
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git
