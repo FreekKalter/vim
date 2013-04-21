@@ -591,6 +591,14 @@ augroup helpfiles
     autocmd FileType help,text setlocal textwidth=78
 augroup END
 
+nnoremap <leader><tab> :call AlignTagToRight()<cr>
+
+function! AlignTagToRight()
+    let l:toSpace = &textwidth - strlen(getline('.')) +1
+    let l:toReplace = substitute( getline('.') , '\s\*' , repeat(' ', l:toSpace) . '\*' , "")
+    call setline( '.', l:toReplace)
+endfunction
+
 " }}}
 " Abbrevations {{{
 
