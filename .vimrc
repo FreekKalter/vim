@@ -91,6 +91,7 @@ set title
 
 set colorcolumn=+1
 set sessionoptions+=resize,winpos,globals
+" Save global vars in between startups
 set viminfo+=!
 " Time out on key codes but not mappings.
 " Basically this makes terminal Vim work sanely.
@@ -262,6 +263,10 @@ function! ToggleHelpSyntax ()
         set filetype=help
     endif
 endfunction
+
+" colorCarousel
+noremap <F8> :call ColorCarouselNextColor('light')<cr>
+noremap <F9> :call ColorCarouselNextColor('dark')<cr>
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
