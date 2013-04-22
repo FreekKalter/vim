@@ -150,7 +150,11 @@ if exists("g:CURRENTCOLOR") == 1
 endif
 
 if has('gui_running')
-    set guifont=DejaVu\ Sans\ Mono\ 10
+    if has('gui_macvim')
+        set guifont=Menlo:h12
+    else
+        set guifont=DejaVu\ Sans\ Mono\ 10
+    endif
      " maximize window when vim is fully loaded otherwise some other comands
      " overrides these values
     autocmd VimEnter * set lines=60 columns=239  
