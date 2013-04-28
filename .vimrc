@@ -44,7 +44,6 @@ set softtabstop=4
 set expandtab
 set autoindent
 set smarttab
-set showmatch
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
 
@@ -205,6 +204,7 @@ inoremap jk <Esc>
 cnoremap jk <C-c>
 
 let mapleader = ";"
+let maplocalleader = ","
 
 nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 
@@ -523,11 +523,12 @@ augroup whitespace
     autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
 augroup end
 
-augroup Go
-  au!
-  autocmd FileType go autocmd BufWritePre <buffer> 
-    \execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
-augroup END
+nnoremap <localleader>c :Fmt<cr>
+" augroup Go
+  "au!
+  "autocmd FileType go autocmd BufWritePre <buffer> 
+    "\execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
+" augroup END
 
 " }}}
 " Refresh firefox on saving website related documents {{{
@@ -614,6 +615,7 @@ endfunction
 ab rigth right
 ab rigth_ right_
 ab _rigth _right
+ab lenght length
 ab ligth light
 ab frk Freek Kalter
 ab ccopy Copyright (c) 2013 Freek Kalter
