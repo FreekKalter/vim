@@ -97,6 +97,8 @@ set viminfo+=!
 " set notimeout
 " set ttimeout
 " set ttimeoutlen=10
+"
+set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,tags
 
 " Backups {{{
 set backup
@@ -132,6 +134,9 @@ set wildignore+=.hg,.git,.snv   " Version control
 let g:syntastic_auto_loc_list=1 
 let g:syntastic_auto_jump=1 
 let g:syntastic_perl_lib_path = './lib'
+let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_go_checkers = ['go']
+
 
 " }}}
 " Visual stuff {{{
@@ -270,6 +275,11 @@ noremap <F9> :call ColorCarouselNextColor('dark')<cr>
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+
+" saving with ctrl-s
+inoremap <C-s> <esc>:w<CR>li
+nnoremap <C-s> :w<CR>
+
 
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
