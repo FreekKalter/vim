@@ -523,7 +523,7 @@ let NERDTreeIgnore=['^NTUSER\.DAT', '\~$']
 augroup clean_comments
     " e flag is to surpress error message if pattern is not found
     autocmd!
-    autocmd FileType vim autocmd BufWritePre <buffer> :%s/\v^"(\S)/" \1/e
+    "autocmd FileType vim autocmd BufWritePre <buffer> :%s/\v^"(\S)/" \1/e
     autocmd FileType zsh autocmd BufWritePre <buffer> :%s/\v^(#+)([^#[:space:]])/\1 \2/e
 augroup end
 
