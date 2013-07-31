@@ -631,3 +631,14 @@ ab === ===================================================================
     \===========
 
 " }}}
+" Text bubbling {{{
+
+" Single lines in normal mode
+nmap <C-Down> ddp
+nmap <C-Up> ddkP
+
+" use unimpaired but restore visual selection
+vmap [e [egv
+vmap ]e ]egv
+
+" }}}
