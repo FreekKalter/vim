@@ -61,3 +61,6 @@
 [submodule "vim-abolish"]
 	path = vim-abolish
 	url = git://github.com/tpope/vim-abolish.git
+[submodule "abolish"]
+	path = abolish
+	url = https://github.com/tpope/vim-abolish.git
