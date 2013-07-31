@@ -622,11 +622,6 @@ endfunction
 " }}}
 " Abbrevations {{{
 
-ab rigth right
-ab rigth_ right_
-ab _rigth _right
-ab lenght length
-ab ligth light
 ab frk Freek Kalter
 ab ccopy Copyright (c) 2013 Freek Kalter
 ab cbsd Use of this source code is governed by the "Revised BSD License"
