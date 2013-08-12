@@ -24,7 +24,7 @@
 	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
-	url = git@github.com/FreekKalter/syntastic
+	url = git@github.com:FreekKalter/syntastic
 [submodule "bundle/surround"]
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
