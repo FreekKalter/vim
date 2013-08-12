@@ -75,7 +75,7 @@ set laststatus=2
 set ttyfast
 " apply global substitutions on lines
 set gdefault
-" searching/scrolling keeps focus in the middle of the screen 
+" searching/scrolling keeps focus in the middle of the screen
 set scrolloff=5
 " set the gui options the way I like
 set guioptions=ac
@@ -131,8 +131,8 @@ set wildignore+=.hg,.git,.snv   " Version control
 " }}}
 " Syntastic {{{
 
-let g:syntastic_auto_loc_list=1 
-let g:syntastic_auto_jump=1 
+let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_jump=1
 let g:syntastic_perl_lib_path = './lib'
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
@@ -144,14 +144,14 @@ let g:syntastic_go_checkers = ['go']
 set background=dark
 " <F8> cycle throug light scheme     <F9> cycle throug dark schemes
 let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
-                            \ 'simpleandfriendly' ]
+            \ 'simpleandfriendly' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
-                            \'distinguished' ]
+            \'distinguished' ]
 " set the colorscheme used in last session
 autocmd VimEnter * execute 'colorscheme ' . g:CURRENTCOLOR
 " keep current colorscheme when reloading vimrc
 if exists("g:CURRENTCOLOR") == 1
-   execute 'colorscheme ' . g:CURRENTCOLOR
+    execute 'colorscheme ' . g:CURRENTCOLOR
 endif
 
 if has('gui_running')
@@ -160,9 +160,9 @@ if has('gui_running')
     else
         set guifont=DejaVu\ Sans\ Mono\ 10
     endif
-     " maximize window when vim is fully loaded otherwise some other comands
-     " overrides these values
-    autocmd VimEnter * set lines=60 columns=239  
+    " maximize window when vim is fully loaded otherwise some other comands
+    " overrides these values
+    autocmd VimEnter * set lines=60 columns=239
 
 else
     set t_Co=256
@@ -171,17 +171,17 @@ endif
 
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
-   
+
 if hostname == "London" && ! has('gui_running')
-    au InsertEnter * silent execute "!sed -i.bak -e 
-        \'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
-        \~/.config/Terminal/terminalrc"
-    au InsertLeave * silent execute "!sed -i.bak -e 
-        \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' 
-        \~/.config/Terminal/terminalrc"
-    au VimLeave * silent execute "!sed -i.bak -e 
-        \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/' 
-        \~/.config/Terminal/terminalrc"
+    au InsertEnter * silent execute "!sed -i.bak -e
+                \'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
+                \~/.config/Terminal/terminalrc"
+    au InsertLeave * silent execute "!sed -i.bak -e
+                \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
+                \~/.config/Terminal/terminalrc"
+    au VimLeave * silent execute "!sed -i.bak -e
+                \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
+                \~/.config/Terminal/terminalrc"
 endif
 " }}}
 " Mappings {{{
@@ -191,13 +191,13 @@ endif
 nnoremap J mzJ`z
 
 " Join line above current line behind current line
-" mainly for joining short comments above a line 
+" mainly for joining short comments above a line
 nnoremap JJ mzk^dg_j$lpkdd`z
 " make moving up and down more intuitive with wrapped lines
 nnoremap j gj
 nnoremap k gk
 
-" use this to paste indented code 
+" use this to paste indented code
 set pastetoggle=<F2>
 
 nnoremap Y y$
@@ -231,7 +231,7 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
 " pane.
 nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
-inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR> 
+inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
 
 nnoremap Q <nop>
 
@@ -249,7 +249,7 @@ nnoremap <space> za
 " clear search higlight
 nnoremap <bs> :nohlsearch<cr>
 
-" upercase a word 
+" upercase a word
 nnoremap <leader>u viw~
 
 " Create empty line above/below current from normal mode
@@ -330,9 +330,9 @@ function! s:Pulse() " {{{
     setlocal cursorline
 
     redir => old_hi
-        silent execute 'hi CursorLine'
+    silent execute 'hi CursorLine'
     redir END
-    let old_guibg = matchlist( old_hi, 'guibg=\(#[0-9a-zA-Z]\{6}\)') 
+    let old_guibg = matchlist( old_hi, 'guibg=\(#[0-9a-zA-Z]\{6}\)')
     let old_hi = split(old_hi, '\n')[0]
     let old_hi = substitute(old_hi, 'xxx', '', '')
 
@@ -341,7 +341,7 @@ function! s:Pulse() " {{{
             silent execute "hi CursorLine guibg=Red"
             redraw
             sleep 16m
-            
+
             silent execute "hi CursorLine guibg=". old_guibg[1]
             redraw
             sleep 16m
@@ -431,9 +431,9 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 augroup line_return
     au!
     au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \ execute 'normal! g`"zvzz' |
-        \ endif
+                \ if line("'\"") > 0 && line("'\"") <= line("$") |
+                \ execute 'normal! g`"zvzz' |
+                \ endif
 augroup END
 
 " }}}
@@ -444,9 +444,9 @@ command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
 
 " run :Tidy on entire buffer and return cursor to (approximate) original position"
 fun! DoTidy()
-    let Pos = line2byte( line( "." ) ) 
+    let Pos = line2byte( line( "." ) )
     :Tidy
-    exe "goto " . Pos 
+    exe "goto " . Pos
 endfun
 
 " shortcut for normal/visual mode to run on entire buffer then return to current line"
@@ -470,13 +470,13 @@ inoremap <silent> <C-j> <esc>:wincmd j<CR>
 inoremap <silent> <C-k> <esc>:wincmd k<CR>
 inoremap <silent> <C-l> <esc>:wincmd l<CR>
 
-" pave moving 
+" pave moving
 nnoremap <silent> <leader>L <C-W>L
 nnoremap <silent> <leader>K <C-W>K
 nnoremap <silent> <leader>H <C-W>H
 nnoremap <silent> <leader>J <C-W>J
 
-" pane resizing 
+" pane resizing
 nnoremap <silent> <leader>l :vertical resize +10<CR>
 nnoremap <silent> <leader>h :vertical resize -10<CR>
 nnoremap <silent> <leader>j :resize +10<CR>
@@ -515,7 +515,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeHijackNetrw=1
 
 " NERDTREE file filters
-let NERDTreeIgnore=['^NTUSER\.DAT', '\~$'] 
+let NERDTreeIgnore=['^NTUSER\.DAT', '\~$']
 
 " }}}
 " Tidying up {{{
@@ -529,38 +529,38 @@ augroup end
 
 " clean whitespace at end of lines
 augroup whitespace
-    au!
-    autocmd FileType c,perl,sh autocmd BufWritePre <buffer> :%s/\s\+$//e
+    autocmd!
+    autocmd BufWritePre * :%s/\s\+$//e
 augroup end
 
 nnoremap <localleader>c :Fmt<cr>
 " augroup Go
-  "au!
-  "autocmd FileType go autocmd BufWritePre <buffer> 
-    "\execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
+"au!
+"autocmd FileType go autocmd BufWritePre <buffer>
+"\execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
 " augroup END
 
 " }}}
 " Refresh firefox on saving website related documents {{{
 " Requires mozrepl firefox plugin
-autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn  
-            \:call Refresh_firefox()
+"autocmd BufWriteCmd *.html,*.css,*.gtpl,*.tt,*.tt2,*.js,*.mkdn
+            "\:call Refresh_firefox()
 function! Refresh_firefox()
-  if &modified
-    write
-    silent !echo  'vimYo = content.window.pageYOffset;
-          \ vimXo = content.window.pageXOffset;
-          \ BrowserReload();
-          \ content.window.scrollTo(vimXo,vimYo);
-          \ repl.quit();'  |
-          \ nc -w 1 localhost 4242 2>&1 > /dev/null
-  endif
+    if &modified
+        write
+        silent !echo  'vimYo = content.window.pageYOffset;
+                    \ vimXo = content.window.pageXOffset;
+                    \ BrowserReload();
+                    \ content.window.scrollTo(vimXo,vimYo);
+                    \ repl.quit();'  |
+                    \ nc -w 1 localhost 4242 2>&1 > /dev/null
+    endif
 endfunction
 
 " }}}
 " Quick dot-file hacking mappings and stuff {{{
 
-" open .vimrc in splitwindow 
+" open .vimrc in splitwindow
 nnoremap <leader>ev <C-w><C-v><C-l>:e ~/.vim/.vimrc<cr>
 nnoremap <leader>ea <C-w><C-v><C-l>:e ~/github/zsh-conf/.zsh_aliases<cr>
 nnoremap <leader>ez <C-w><C-v><C-l>:e ~/github/zsh-conf/.zshrc<cr>
@@ -578,7 +578,7 @@ augroup Zsh_alias
     autocmd FileType zsh setlocal foldmethod=expr foldexpr=GetZshAliasFold(v:lnum)
 augroup END
 
-" or maybe just use marks 
+" or maybe just use marks
 function! GetZshAliasFold(lnum)
     if getline(a:lnum) =~? '\v^\s*$'
         return '0'
@@ -607,7 +607,7 @@ nnoremap <leader>ct :tabclose<cr>
 " }}}
 " Help files {{{
 augroup helpfiles
-    au! 
+    au!
     autocmd FileType help,text setlocal textwidth=78
 augroup END
 
@@ -628,7 +628,7 @@ ab cbsd Use of this source code is governed by the "Revised BSD License"
             \that can be found in the LICENSE file.
 ab wbs kalteronline.org
 ab === ===================================================================
-    \===========
+            \===========
 
 " }}}
 " Text bubbling {{{
