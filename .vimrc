@@ -19,6 +19,7 @@ set nocompatible
 " Basic vim settings {{{
 
 " Turn on that syntax highlighting
+set t_Co=256
 syntax enable
 
 set encoding=utf-8
@@ -61,7 +62,6 @@ set ch=2
 set number
 " highlight current line
 set cursorline
-set visualbell
 " virtual edit: move the cursor on invalid empty space
 set virtualedit=all
 
@@ -98,7 +98,7 @@ set viminfo+=!
 " set ttimeout
 " set ttimeoutlen=10
 "
-set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,tags
+"set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../../tags,tags
 
 " Backups {{{
 set backup
@@ -133,8 +133,8 @@ set wildignore+=.hg,.git,.snv   " Version control
 
 let g:syntastic_auto_loc_list=1
 let g:syntastic_auto_jump=1
-let g:syntastic_perl_lib_path = './lib'
-let g:syntastic_perl_checkers = ['perl']
+"let g:syntastic_perl_lib_path = './lib'
+"let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
 
@@ -176,6 +176,8 @@ endif
 if exists("g:CURRENTFONT") == 1
     execute 'set guifont=' . g:CURRENTFONT
 endif
+"set antialias
+
 
 let s:currentFont = -1
 function! FontCarousel()
@@ -201,17 +203,17 @@ endfunction
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
 
-if hostname == "London" && ! has('gui_running')
-    au InsertEnter * silent execute "!sed -i.bak -e
-                \'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
-                \~/.config/Terminal/terminalrc"
-    au InsertLeave * silent execute "!sed -i.bak -e
-                \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
-                \~/.config/Terminal/terminalrc"
-    au VimLeave * silent execute "!sed -i.bak -e
-                \'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
-                \~/.config/Terminal/terminalrc"
-endif
+"if hostname == "London" && ! has('gui_running')
+    "au InsertEnter * silent execute "!sed -i.bak -e
+                "\'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
+                "\~/.config/Terminal/terminalrc"
+    "au InsertLeave * silent execute "!sed -i.bak -e
+                "\'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
+                "\~/.config/Terminal/terminalrc"
+    "au VimLeave * silent execute "!sed -i.bak -e
+                "\'s/TERMINAL_CURSOR_SHAPE_UNDERLINE/TERMINAL_CURSOR_SHAPE_BLOCK/'
+                "\~/.config/Terminal/terminalrc"
+"endif
 " }}}
 " Mappings {{{
 
@@ -308,7 +310,7 @@ noremap <F7> :call FontCarousel()<cr>
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " saving with ctrl-s
-inoremap <C-s> <esc>:w<CR>li
+inoremap <C-s> <esc>:w<CR>
 nnoremap <C-s> :w<CR>
 
 
