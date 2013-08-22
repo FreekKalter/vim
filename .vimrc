@@ -460,15 +460,28 @@ augroup END
 " Moving/switching/resizing windows/panes around {{{
 
 " pane switcing
-nnoremap <silent> <C-h> :wincmd h<CR>
-nnoremap <silent> <C-j> :wincmd j<CR>
-nnoremap <silent> <C-k> :wincmd k<CR>
-nnoremap <silent> <C-l> :wincmd l<CR>
+"nnoremap <silent> <C-h> :wincmd h<CR>
+"nnoremap <silent> <C-j> :wincmd j<CR>
+"nnoremap <silent> <C-k> :wincmd k<CR>
+"nnoremap <silent> <C-l> :wincmd l<CR>
 
-inoremap <silent> <C-h> <esc>:wincmd h<CR>
-inoremap <silent> <C-j> <esc>:wincmd j<CR>
-inoremap <silent> <C-k> <esc>:wincmd k<CR>
-inoremap <silent> <C-l> <esc>:wincmd l<CR>
+"inoremap <silent> <C-h> <esc>:wincmd h<CR>
+"inoremap <silent> <C-j> <esc>:wincmd j<CR>
+"inoremap <silent> <C-k> <esc>:wincmd k<CR>
+"inoremap <silent> <C-l> <esc>:wincmd l<CR>
+
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+
+nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 " pave moving
 nnoremap <silent> <leader>L <C-W>L

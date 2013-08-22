@@ -61,3 +61,6 @@
 [submodule "bundle/abolish"]
 	path = bundle/abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "bundle/tmux-navigator"]
+	path = bundle/tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
