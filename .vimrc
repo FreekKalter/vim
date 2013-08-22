@@ -146,28 +146,57 @@ set background=dark
 let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
             \ 'simpleandfriendly' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
-            \'distinguished' ]
+            \'distinguished' , 'molokai' ]
+let s:fontCarousel = [ 'Source\ Code\ Pro\ Semibold\ 10' ,
+            \'DejaVu\ Sans\ \Mono\ 10',
+            \'Ubuntu\ Mono\ 12',
+            \'Source\ Code\ Pro\ Semibold\ 11',
+            \'Anonymous\ Pro\ Bold\ 12',
+            \'Inconsolata\ 12',
+            \'Droid\ Sans\ Mono\ 10',
+            \'Monofur\ 14',]
+
+if has('gui_running')
+    if has('gui_macvim')
+        set guifont=Menlo:h12
+    endif
+    " maximize window when vim is fully loaded otherwise some other comands
+    " overrides these values
+    autocmd VimEnter * set lines=60 columns=239
+endif
+
 " set the colorscheme used in last session
 autocmd VimEnter * execute 'colorscheme ' . g:CURRENTCOLOR
+autocmd VimEnter * execute 'set guifont=' . g:CURRENTFONT
 " keep current colorscheme when reloading vimrc
 if exists("g:CURRENTCOLOR") == 1
     execute 'colorscheme ' . g:CURRENTCOLOR
 endif
 
-if has('gui_running')
-    if has('gui_macvim')
-        set guifont=Menlo:h12
-    else
-        set guifont=DejaVu\ Sans\ Mono\ 10
-    endif
-    " maximize window when vim is fully loaded otherwise some other comands
-    " overrides these values
-    autocmd VimEnter * set lines=60 columns=239
-
-else
-    set t_Co=256
-    colorscheme molokai
+if exists("g:CURRENTFONT") == 1
+    execute 'set guifont=' . g:CURRENTFONT
 endif
+
+let s:currentFont = -1
+function! FontCarousel()
+    " Update counter
+    if s:currentFont == -1
+        let s:currentFont = 0
+    else
+        let s:currentFont += 1
+    endif
+
+    " cylce counter
+    if s:currentFont > len(s:fontCarousel)-1
+        let s:currentFont = 0
+    endif
+
+    " set font
+    execute 'set guifont=' . s:fontCarousel[s:currentFont]
+    redraw
+    let g:CURRENTFONT = s:fontCarousel[s:currentFont]
+    echo g:CURRENTFONT
+endfunction
 
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
@@ -272,6 +301,8 @@ endfunction
 " colorCarousel
 noremap <F8> :call ColorCarouselNextColor('light')<cr>
 noremap <F9> :call ColorCarouselNextColor('dark')<cr>
+" fontCarousel
+noremap <F7> :call FontCarousel()<cr>
 
 " writing a file as root
 command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
