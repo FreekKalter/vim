@@ -683,20 +683,21 @@ nnoremap <leader>ct :tabclose<cr>
 
 " }}}
 " Help files {{{
+
 augroup helpfiles
     au!
     autocmd FileType help,text setlocal textwidth=78
 augroup END
 
+" Align help tags all the way to the right                         *like this*
 nnoremap <leader><tab> :call AlignTagToRight()<cr>
-
 function! AlignTagToRight()
     let l:toSpace = &textwidth - strlen(getline('.')) +1
     let l:toReplace = substitute( getline('.') , '\s\*' , repeat(' ', l:toSpace) . '\*' , "")
     call setline( '.', l:toReplace)
 endfunction
 
-" }}}
+"}}}
 " Abbrevations {{{
 
 ab frk Freek Kalter
