@@ -242,8 +242,6 @@ cnoremap jk <C-c>
 let mapleader = ";"
 let maplocalleader = ","
 
-nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
-
 " Use sane regex matching (magic)
 nnoremap / /\v
 vnoremap / /\v
@@ -313,6 +311,7 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 inoremap <C-s> <esc>:w<CR>
 nnoremap <C-s> :w<CR>
 
+nnoremap <F6> :TagbarToggle<CR>
 
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
@@ -355,6 +354,8 @@ let g:sparkupNextMapping = '<c-x>'
 
 " }}}
 " Pulse Line {{{
+
+nnoremap <c-z> mzzMzvzz15<c-e>`z:Pulse<cr>
 
 function! s:Pulse() " {{{
     let current_window = winnr()
@@ -580,8 +581,38 @@ augroup whitespace
 augroup end
 
 nnoremap <localleader>c :Fmt<cr>
-" augroup Go
-"au!
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+augroup Go
+    au!
+    "au FileType go autocmd BufWritePre <buffer> :Fmt
+augroup end
 "autocmd FileType go autocmd BufWritePre <buffer>
 "\execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
 " augroup END
