@@ -70,3 +70,6 @@
 [submodule "bundle/autoclose"]
 	path = bundle/autoclose
 	url = https://github.com/Townk/vim-autoclose.git
+[submodule "bundle/godef"]
+	path = bundle/godef
+	url = https://github.com/dgryski/vim-godef
