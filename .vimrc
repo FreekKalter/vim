@@ -147,6 +147,9 @@ let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
             \ 'simpleandfriendly' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
             \'distinguished' , 'molokai' ]
+let g:terminalDarkColorCarousel = [ 'grb256' , 'molokai' ]
+let g:terminalLightColorCarousel = [ 'summerfruit256' ]
+
 let s:fontCarousel = [ 'Source\ Code\ Pro\ Semibold\ 10' ,
             \'DejaVu\ Sans\ \Mono\ 10',
             \'Ubuntu\ Mono\ 12',
