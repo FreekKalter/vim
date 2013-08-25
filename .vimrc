@@ -147,7 +147,7 @@ let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
             \ 'simpleandfriendly' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
             \'distinguished' , 'molokai' ]
-let g:terminalDarkColorCarousel = [ 'grb256' , 'molokai' ]
+let g:terminalDarkColorCarousel = [ 'grb256' , 'molokai' , 'jellybeans' ]
 let g:terminalLightColorCarousel = [ 'summerfruit256' ]
 
 let s:fontCarousel = [ 'Source\ Code\ Pro\ Semibold\ 10' ,
@@ -514,11 +514,11 @@ nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
-nnoremap <silent> <C-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
-nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
+inoremap <silent> <C-h> :TmuxNavigateLeft<cr>
+inoremap <silent> <C-j> :TmuxNavigateDown<cr>
+inoremap <silent> <C-k> :TmuxNavigateUp<cr>
+inoremap <silent> <C-l> :TmuxNavigateRight<cr>
+inoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 " pave moving
 nnoremap <silent> <leader>L <C-W>L
