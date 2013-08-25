@@ -311,7 +311,7 @@ command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 inoremap <C-s> <esc>:w<CR>
 nnoremap <C-s> :w<CR>
 
-nnoremap <F6> :TagbarToggle<CR>
+nnoremap <silent> <F6> :TagbarToggle<CR>
 
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
@@ -610,12 +610,9 @@ let g:tagbar_type_go = {
 \ }
 
 augroup Go
-    au!
-    "au FileType go autocmd BufWritePre <buffer> :Fmt
-augroup end
-"autocmd FileType go autocmd BufWritePre <buffer>
-"\execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
-" augroup END
+    autocmd!
+    autocmd FileType go autocmd BufWritePre <buffer> :silent! execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
+augroup END
 
 " }}}
 " Refresh firefox on saving website related documents {{{
