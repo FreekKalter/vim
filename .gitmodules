@@ -76,3 +76,6 @@
 [submodule "bundle/gocode"]
 	path = bundle/gocode
 	url = https://github.com/nsf/gocode.git
+[submodule "bundle/snipmate"]
+	path = bundle/snipmate
+	url = https://github.com/garbas/vim-snipmate.git
