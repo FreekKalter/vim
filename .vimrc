@@ -348,13 +348,12 @@ nnoremap <leader>gs :Gstatus<cr>
 
 " }}}
 " Completion {{{
-"let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabNoCompleteAfter = ['^', ',', '\s', '(' ]
-"set completeopt=longest,menuone
-" let g:SuperTabLongestHighlight = 1
-" set complete=.,b,u,]
-let g:sparkupNextMapping = '<c-x>'
+let g:SuperTabLongestHighlight=1
+let g:SuperTabLongestEnhanced=1
+set completeopt=menu,menuone,longest
 
 " }}}
 " Pulse Line {{{
