@@ -90,6 +90,7 @@ set title
 
 set colorcolumn=+1
 set sessionoptions+=resize,winpos,globals
+set viewoptions+=cursor,folds,options,slash,unix
 " Save global vars in between startups
 set viminfo+=!
 " Time out on key codes but not mappings.
@@ -717,6 +718,3 @@ vmap [e [egv
 vmap ]e ]egv
 
 " }}}
-
-let g:loaded_AutoClose = 1
-let loaded_snips = 1
