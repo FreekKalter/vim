@@ -33,10 +33,10 @@ if g:go_fmt_commands
 endif
 
 function! s:GoFormat()
-    normal zi
+    let s:fold_setting = &foldenable
+    silent set nofoldenable
     let view = winsaveview()
-    "silent %!goimports
-    %!goimports
+    silent! %!goimports
     if v:shell_error
         let errors = []
         for line in getline(1, line('$'))
@@ -52,13 +52,14 @@ function! s:GoFormat()
             % | " Couldn't detect gofmt error format, output errors
         endif
         undo
-        if !empty(errors)
-            call setloclist(0, errors, 'r')
-        endif
-        echohl Error | echomsg "Gofmt returned error" | echohl None
+        "if !empty(errors)
+            "call setloclist(0, errors, 'r')
+        "endif
+        "echohl Error | echomsg "Gofmt returned error" | echohl None
     endif
     call winrestview(view)
-    normal zi
+    let &foldenable = s:fold_setting
+
 endfunction
 
 let b:did_ftplugin_go_fmt = 1
