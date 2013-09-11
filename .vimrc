@@ -611,7 +611,7 @@ let g:tagbar_type_go = {
 
 augroup Go
     autocmd!
-    autocmd FileType go autocmd BufWritePre <buffer> :silent! execute "normal! mz:mkview\<esc>:Fmt\<esc>:loadview\<esc>`z"
+    autocmd FileType go autocmd BufWritePre <buffer> :Fmt
 augroup END
 
 " }}}
