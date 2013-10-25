@@ -135,7 +135,7 @@ set wildignore+=.hg,.git,.snv   " Version control
 let g:syntastic_auto_loc_list=1
 let g:syntastic_auto_jump=1
 "let g:syntastic_perl_lib_path = './lib'
-"let g:syntastic_perl_checkers = ['perl']
+let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
 
@@ -350,7 +350,7 @@ nnoremap <leader>gs :Gstatus<cr>
 " Completion {{{
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabClosePreviewOnPopupClose = 1
-let g:SuperTabNoCompleteAfter = ['^', ',', '\s', '(' ]
+let g:SuperTabNoCompleteAfter = ['^', ',', '\s', '(', ')' ]
 let g:SuperTabLongestHighlight=1
 let g:SuperTabLongestEnhanced=1
 set completeopt=menu,menuone,longest
