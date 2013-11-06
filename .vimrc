@@ -125,7 +125,6 @@ endif
 
 " set wildmenu on
 set wildmenu
-set wildmode=list:longest
 set wildignore+=.hg,.git,.snv   " Version control
 
 " }}}
@@ -170,18 +169,20 @@ if has('gui_running')
 endif
 
 " set the colorscheme used in last session
-autocmd VimEnter * execute 'colorscheme ' . g:CURRENTCOLOR
-autocmd VimEnter * execute 'set guifont=' . g:CURRENTFONT
-" keep current colorscheme when reloading vimrc
-if exists("g:CURRENTCOLOR") == 1
-    execute 'colorscheme ' . g:CURRENTCOLOR
-endif
+autocmd VimEnter * call SetCurrentColorScheme()
+function! SetCurrentColorScheme()
+    if exists("g:CURRENTCOLOR") == 1
+        execute 'colorscheme ' . g:CURRENTCOLOR
+    endif
+endfunction
 
-if exists("g:CURRENTFONT") == 1
-    execute 'set guifont=' . g:CURRENTFONT
-endif
-"set antialias
-
+" set last used font in gui vim
+autocmd VimEnter * call SetCurrentFont()
+function! SetCurrentFont()
+    if exists("g:CURRENTFONT") == 1
+        execute 'set guifont=' . g:CURRENTFONT
+    endif
+endfunction
 
 let s:currentFont = -1
 function! FontCarousel()
@@ -316,6 +317,8 @@ inoremap <C-s> <esc>:w<CR>
 nnoremap <C-s> :w<CR>
 
 nnoremap <silent> <F6> :TagbarToggle<CR>
+
+inoremap <C-d> <C-o>x
 
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
