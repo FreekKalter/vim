@@ -48,6 +48,10 @@ set smarttab
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
 
+" wrap long lines
+set wrap
+set linebreak
+
 " set the search scan to wrap lines
 set wrapscan
 " set the search scan so that it ignores case when the search is all lower
