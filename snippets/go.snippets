@@ -54,6 +54,14 @@ snippet pan
 	if err != nil {
 		panic(err)
 	}
+snippet fats
+	if err != nil {
+		slog.Fatal(err)
+	}
+snippet fat
+	if err != nil {
+		log.Fatal(err)
+	}
 snippet read
 	${1:varName}, err := ioutil.ReadFile("${2:filename}")
 	if err != nil {
