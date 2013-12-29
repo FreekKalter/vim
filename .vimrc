@@ -141,6 +141,7 @@ let g:syntastic_auto_jump=1
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
+let g:syntastic_javascript_chekcers = ['jshint']
 
 " }}}
 " Visual stuff {{{
