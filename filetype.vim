@@ -11,6 +11,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.pl.tdy set filetype=perl
 
     au BufNewFile,BufRead *.go  set filetype=go
+    au BufNewFile,BufRead *.ino set filetype=c
 
     au BufNewFile,BufRead .tmux.conf set filetype=tmux
 
