@@ -4,3 +4,6 @@ tmp/
 view/
 *perl-modules.list*
 doc/tags
+
+bundle/**
+~bundle/vundle

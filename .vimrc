@@ -6,15 +6,57 @@
 
 " Preamble {{{
 
-runtime bundle/pathogen/autoload/pathogen.vim
-call pathogen#infect()
-
-filetype on
-" call pathogen to mangage runtime paths
-filetype indent plugin on
 " Forget being compatible with good ol' vi
 set nocompatible
+filetype off
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+
+" }}}
+" Vundle bundles {{{
+
+ " let Vundle manage Vundle, required
+Plugin 'gmarik/vundle'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-abolish'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'sjl/clam.vim'
+Plugin 'FreekKalter/vim-colorCarousel'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'kien/ctrlp.vim'
+Plugin 'sjl/gundo.vim'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-obsession'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Plugin 'ervandew/supertab'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'fatih/vim-go'
+
+" Plugin 'sjl/badwolf'
+" Plugin 'altercation/vim-colors-solarized'
+" Plugin 'dgryski/vim-godef'
+" Plugin 'FreekKalter/nerdcommenter'
+" Plugin 'scrooloose/nerdtree'
+" Plugin 'tpope/vim-pathogen'
+" Plugin 'FreekKalter/syntastic'
+" Plugin 'FreekKalter/tagbar'
+" Plugin 'majutsushi/tagbar'
+" Plugin 'MarcWeber/vim-addon-mw-utils'
+filetype indent plugin on
 " }}}
 " Basic vim settings {{{
 
