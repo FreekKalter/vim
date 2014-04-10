@@ -3,15 +3,19 @@ Vim config directory
 
 ## Usage
 
-*.vimrc* is the main config file for vim. Your *.vimrc* file should be in your home directory so from there create a link to the *.vimrc* in this repo. It can't be a symlink and git doesn't handle hardlinks like you would expect. So after you make some changes to this file you make a new hardlink.
+*.vimrc* is the main config file for vim. Your *.vimrc* file should be in your home directory so from there create a link to the *.vimrc* in this repo.
+Plugins are handled with vundle.
 
-There are two scripts included wich will handle this for you. The create_links.sh scripts does the actual linking, the create_hooks.sh creates git hooks wich will keep the links up to date.
+When starting from scratch (from your home dir):
 
-So when starting from scratch:
+    * git clone git@github.com:FreekKalter/vim.git .vim
+    * ln -s .vim/.vimrc .vimrc
+    * cd .vim
+    * git clone https://github.com/gmarik/vundle.git bundle/vundle
+    * start vim and run :PluginInstall
 
-    * clone this repo
-    * run ./create_links.sh
-    * run ./create_hooks.sh
+To update plugins:
+    * in vim run :PluginUpdate
 
 ## License
 
