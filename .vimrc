@@ -33,7 +33,7 @@ Plugin 'sjl/gundo.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'nelstrom/vim-markdown-folding'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'FreekKalter/nerdcommenter'
 Plugin 'tpope/vim-obsession'
 Bundle 'MarcWeber/vim-addon-mw-utils'
 Bundle 'tomtom/tlib_vim'
@@ -49,7 +49,6 @@ Plugin 'fatih/vim-go'
 " Plugin 'sjl/badwolf'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'dgryski/vim-godef'
-" Plugin 'FreekKalter/nerdcommenter'
 " Plugin 'scrooloose/nerdtree'
 " Plugin 'tpope/vim-pathogen'
 " Plugin 'FreekKalter/syntastic'
@@ -178,6 +177,8 @@ set wildignore+=.hg,.git,.snv   " Version control
 " Syntastic {{{
 
 let g:syntastic_auto_loc_list=1
+let g:go_fmt_fail_silently = 1
+
 let g:syntastic_auto_jump=1
 "let g:syntastic_perl_lib_path = './lib'
 let g:syntastic_perl_checkers = ['perl']
@@ -637,7 +638,6 @@ augroup whitespace
     autocmd BufWritePre * :%s/\s\+$//e
 augroup end
 
-nnoremap <localleader>c :Fmt<cr>
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -665,11 +665,6 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
-
-augroup Go
-    autocmd!
-    autocmd FileType go autocmd BufWritePre <buffer> :Fmt
-augroup END
 
 " }}}
 " Refresh firefox on saving website related documents {{{
