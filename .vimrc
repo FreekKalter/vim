@@ -45,6 +45,9 @@ Plugin 'godlygeek/tabular'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'fatih/vim-go'
+" vim script library with utility functions (needed for fuzzyfinder)
+Plugin 'L9'
+Plugin 'FuzzyFinder'
 
 " Plugin 'sjl/badwolf'
 " Plugin 'altercation/vim-colors-solarized'
@@ -370,6 +373,8 @@ inoremap <C-d> <C-o>x
 
 nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
+
+nnoremap <leader>f :FufCoverageFile<CR>
 
 function! s:GrepOperator(type)
     let saved_unnamed_register = @@
