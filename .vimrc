@@ -499,6 +499,13 @@ augroup perl_tidy
 augroup END
 
 " }}}
+" Go {{{
+augroup go_vim
+    autocmd!
+    au FileType go nmap <leader>d <Plug>(go-doc)
+    au FileType go nmap <leader>r <Plug>(go-run)
+augroup end
+" }}}
 " Moving/switching/resizing windows/panes around {{{
 
 " pane switcing
