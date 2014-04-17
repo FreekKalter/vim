@@ -21,34 +21,50 @@ call vundle#rc()
  " let Vundle manage Vundle, required
 Plugin 'gmarik/vundle'
 
-Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'tpope/vim-abolish'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'sjl/clam.vim'
-Plugin 'FreekKalter/vim-colorCarousel'
-Plugin 'Lokaltog/vim-distinguished'
-Plugin 'kien/ctrlp.vim'
-Plugin 'sjl/gundo.vim'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'FreekKalter/nerdcommenter'
+
+" tpope got his own section
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-obsession'
+Plugin 'tpope/vim-unimpaired'
+
+Plugin 'sjl/clam.vim'
+Plugin 'sjl/gundo.vim'
+
+" color schemes
+Plugin 'FreekKalter/vim-colorCarousel'
+" Plugin 'file:///home/fkalter/github/vim-colorCarousel/'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
+Plugin 'FreekKalter/vim-github-theme'
+
+" snipmate dependencies
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
+"
 Plugin 'garbas/vim-snipmate'
-Plugin 'ervandew/supertab'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/syntastic'
-Plugin 'godlygeek/tabular'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'fatih/vim-go'
+
+" fuzzy file opening
+Plugin 'kien/ctrlp.vim'
 " vim script library with utility functions (needed for fuzzyfinder)
 Plugin 'L9'
 Plugin 'FuzzyFinder'
 
+" misc
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'nelstrom/vim-markdown-folding'
+Plugin 'ervandew/supertab'
+Plugin 'scrooloose/syntastic'
+Plugin 'godlygeek/tabular'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'fatih/vim-go'
+
+" some old stuf, keep it around just in case
 " Plugin 'sjl/badwolf'
 " Plugin 'altercation/vim-colors-solarized'
 " Plugin 'dgryski/vim-godef'
@@ -58,6 +74,7 @@ Plugin 'FuzzyFinder'
 " Plugin 'FreekKalter/tagbar'
 " Plugin 'majutsushi/tagbar'
 " Plugin 'MarcWeber/vim-addon-mw-utils'
+
 filetype indent plugin on
 " }}}
 " Basic vim settings {{{
@@ -192,12 +209,10 @@ let g:syntastic_javascript_chekcers = ['jshint']
 " }}}
 " Visual stuff {{{
 " colorscheme
-set background=dark
-" <F8> cycle throug light scheme     <F9> cycle throug dark schemes
 let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
-            \ 'simpleandfriendly' ]
+                            \ 'simpleandfriendly', 'solarized' , 'github' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
-            \'distinguished' , 'molokai' ]
+                            \'distinguished' , 'molokai', 'solarized' ]
 let g:terminalDarkColorCarousel = [ 'grb256' , 'molokai' , 'jellybeans' ]
 let g:terminalLightColorCarousel = [ 'summerfruit256' ]
 
