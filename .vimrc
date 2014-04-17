@@ -253,7 +253,7 @@ function! FontCarousel()
     execute 'set guifont=' . s:fontCarousel[s:currentFont]
     redraw
     let g:CURRENTFONT = s:fontCarousel[s:currentFont]
-    echo g:CURRENTFONT
+    echo substitute(g:CURRENTFONT, '\\', '', 'g')
 endfunction
 
 let os = substitute(system('uname'), "\n", "", "")
