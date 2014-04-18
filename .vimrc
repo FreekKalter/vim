@@ -39,6 +39,7 @@ Plugin 'FreekKalter/vim-colorCarousel'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'FreekKalter/vim-github-theme'
+Plugin 'w0ng/vim-hybrid'
 
 " snipmate dependencies
 Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -212,7 +213,8 @@ let g:syntastic_javascript_chekcers = ['jshint']
 let g:lightColorCarousel = [ 'pyte' ,  'ironman' , 'summerfruit256' ,
                             \ 'simpleandfriendly', 'solarized' , 'github' ]
 let g:darkColorCarousel = [ 'codeschool' , 'jellybeans' , 'grb256' ,
-                            \'distinguished' , 'molokai', 'solarized' ]
+                            \'distinguished' , 'molokai', 'solarized',
+                            \'hybrid' ]
 let g:terminalDarkColorCarousel = [ 'grb256' , 'molokai' , 'jellybeans' ]
 let g:terminalLightColorCarousel = [ 'summerfruit256' ]
 
