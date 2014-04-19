@@ -9,10 +9,8 @@ Plugins are handled with vundle.
 When starting from scratch (from your home dir):
 
     * git clone git@github.com:FreekKalter/vim.git .vim
-    * ln -s .vim/.vimrc .vimrc
     * cd .vim
-    * git clone https://github.com/gmarik/vundle.git bundle/vundle
-    * start vim and run :PluginInstall
+    * ./setup.sh
 
 To update plugins:
     * in vim run :PluginUpdate
