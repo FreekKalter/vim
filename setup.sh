@@ -8,4 +8,4 @@ git clone https://github.com/gmarik/vundle.git bundle/vundle
 echo "[+] vundle cloned"
 echo "[-] installing plugins"
 vim +PluginInstall +qall
-echo "[-] plugins installed"
+echo "[+] plugins installed"
