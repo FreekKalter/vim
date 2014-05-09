@@ -64,6 +64,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'godlygeek/tabular'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'fatih/vim-go'
+Plugin 'vivien/vim-addon-linux-coding-style.git'
 
 " some old stuf, keep it around just in case
 " Plugin 'sjl/badwolf'
@@ -208,6 +209,12 @@ let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
 let g:syntastic_javascript_chekcers = ['jshint']
+
+let g:syntastic_c_remove_include_errors = 1
+"let g:syntastic_c_check_header = 0
+let g:systastic_c_compiler = ['gcc']
+let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_c_include_dirs = ['/usr/src/linux-headers-3.11.0-19/include']
 
 " }}}
 " Visual stuff {{{
