@@ -30,4 +30,4 @@ echo "[+] vundle cloned"
 
 echo "[-] installing plugins"
 vim +PluginInstall +qall
-echo "[-] plugins installed"
+echo "[+] plugins installed"
