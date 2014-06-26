@@ -65,6 +65,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'fatih/vim-go'
 Plugin 'vivien/vim-addon-linux-coding-style.git'
+Plugin 'FreekKalter/vim-python-folding'
 
 " some old stuf, keep it around just in case
 " Plugin 'sjl/badwolf'
@@ -208,7 +209,8 @@ let g:syntastic_auto_jump=1
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
-let g:syntastic_javascript_chekcers = ['jshint']
+let g:syntastic_python_checkers = ['pep8']
+let g:syntastic_javascript_checkers = ['']
 
 let g:syntastic_c_remove_include_errors = 1
 "let g:syntastic_c_check_header = 0
