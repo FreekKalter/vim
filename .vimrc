@@ -33,6 +33,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'sjl/clam.vim'
 Plugin 'sjl/gundo.vim'
 
+" VimShell
+Plugin 'shougo/vimproc'
+Plugin 'shougo/vimshell'
+
 " color schemes
 Plugin 'FreekKalter/vim-colorCarousel'
 " Plugin 'file:///home/fkalter/github/vim-colorCarousel/'
@@ -54,6 +58,8 @@ Plugin 'L9'
 Plugin 'FuzzyFinder'
 
 " misc
+Plugin 'mru.vim'
+Plugin 'rstacruz/sparkup' " html editingen
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'suan/vim-instant-markdown'
@@ -66,6 +72,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'fatih/vim-go'
 Plugin 'vivien/vim-addon-linux-coding-style.git'
 Plugin 'FreekKalter/vim-python-folding'
+Plugin 'nathanaelkane/vim-indent-guides'
 
 " some old stuf, keep it around just in case
 " Plugin 'sjl/badwolf'
@@ -113,6 +120,9 @@ set autoindent
 set smarttab
 " Allow backspacing over indent, eol, and the start of an insert
 set backspace=2
+
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
 
 " wrap long lines
 set wrap
@@ -422,6 +432,10 @@ function! s:GrepOperator(type)
 endfunction
 
 " }}}
+" VimShell {{{
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_prompt =  '$ '
+"}}}
 " Fugitive {{{
 
 " clear buffers created by fugitive
