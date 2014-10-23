@@ -350,8 +350,9 @@ vnoremap ! :ClamVisual<space>
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 
 " AWSOME!!!!
-" mapping to run command in active tmux pane
-" so during hacking in vim, simply hit ;rl and BAM file saved and run in active tmux
+" mapping to run last command in active tmux pane
+" so during hacking in vim, simply hit ;rl and BAM file saved and run
+" last command run in active tmux (presumably something link compile/run)
 " pane.
 nnoremap <leader>rl :w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
 inoremap <leader>rl <esc>:w<Bar>execute 'silent !tmux send-keys Up C-m'<Bar>redraw!<CR>
