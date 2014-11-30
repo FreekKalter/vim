@@ -567,39 +567,6 @@ nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
 nnoremap <silent> <leader>C :call clearmatches()<cr>
 " }}}
 " }}}
-" Line Return {{{
-
-" Make sure Vim returns to the same line when you reopen a file.
-" Thanks, Amit
-augroup line_return
-    au!
-    au BufReadPost *
-                \ if line("'\"") > 0 && line("'\"") <= line("$") |
-                \ execute 'normal! g`"zvzz' |
-                \ endif
-augroup END
-
-" }}}
-" Perl stuff {{{
-
-" define :Tidy command to run perltidy on visual selection || entire buffer"
-command! -range=% -nargs=* Tidy <line1>,<line2>!perltidy
-
-" run :Tidy on entire buffer and return cursor to (approximate) original position"
-fun! DoTidy()
-    let Pos = line2byte( line( "." ) )
-    :Tidy
-    exe "goto " . Pos
-endfun
-
-" shortcut for normal/visual mode to run on entire buffer then return to current line"
-augroup perl_tidy
-    au!
-    au Filetype perl nmap <F4> :call DoTidy()<CR>
-    au Filetype perl vmap <F4> :Tidy<CR>
-augroup END
-
-" }}}
 " Go {{{
 augroup go_vim
     autocmd!
