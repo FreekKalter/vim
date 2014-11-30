@@ -57,6 +57,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'L9'
 Plugin 'FuzzyFinder'
 
+Plugin 'nvie/vim-flake8'
 " misc
 Plugin 'mru.vim'
 Plugin 'rstacruz/sparkup' " html editingen
@@ -219,7 +220,7 @@ let g:syntastic_auto_jump=1
 let g:syntastic_perl_checkers = ['perl']
 let g:syntastic_go_checkers = ['go']
 
-let g:syntastic_python_checkers = ['pep8']
+let g:syntastic_python_checkers = ['']
 let g:syntastic_javascript_checkers = ['']
 
 let g:syntastic_c_remove_include_errors = 1
@@ -228,6 +229,13 @@ let g:systastic_c_compiler = ['gcc']
 let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_c_include_dirs = ['/usr/src/linux-headers-3.11.0-19/include']
 
+" go
+let g:go_fmt_command = "goimports"
+let g:go_autosave = 1
+
+" python
+let g:flake8_max_line_length=99
+let g:flake8_ignore="F403"
 " }}}
 " Visual stuff {{{
 " colorscheme
@@ -414,6 +422,8 @@ nnoremap <leader>g :set operatorfunc=<SID>GrepOperator<cr>g@
 vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
 nnoremap <leader>f :FufCoverageFile<CR>
+
+autocmd BufWritePost *.py call Flake8()
 
 function! s:GrepOperator(type)
     let saved_unnamed_register = @@
