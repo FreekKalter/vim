@@ -233,9 +233,6 @@ let g:syntastic_c_include_dirs = ['/usr/src/linux-headers-3.11.0-19/include']
 let g:go_fmt_command = "goimports"
 let g:go_autosave = 1
 
-" python
-let g:flake8_max_line_length=99
-let g:flake8_ignore="F403"
 " }}}
 " Visual stuff {{{
 " colorscheme
