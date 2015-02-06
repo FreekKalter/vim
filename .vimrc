@@ -426,7 +426,8 @@ vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 
 nnoremap <leader>f :FufCoverageFile<CR>
 
-autocmd BufWritePost *.py call Flake8()
+autocmd FileType python autocmd BufWritePost <buffer> call Flake8()
+
 au FileType go nmap <Leader>god <Plug>(go-doc)
 au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 au FileType go nmap <Leader>gol :GoLint<cr>
