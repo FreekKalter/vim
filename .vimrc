@@ -305,6 +305,9 @@ endfunction
 let os = substitute(system('uname'), "\n", "", "")
 let hostname = substitute(system('hostname'), "\n", "", "")
 
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
 "if hostname == "London" && ! has('gui_running')
     "au InsertEnter * silent execute "!sed -i.bak -e
                 "\'s/TERMINAL_CURSOR_SHAPE_BLOCK/TERMINAL_CURSOR_SHAPE_UNDERLINE/'
@@ -424,6 +427,9 @@ vnoremap <leader>g :<c-u>call <SID>GrepOperator(visualmode())<cr>
 nnoremap <leader>f :FufCoverageFile<CR>
 
 autocmd BufWritePost *.py call Flake8()
+au FileType go nmap <Leader>god <Plug>(go-doc)
+au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+au FileType go nmap <Leader>gol :GoLint<cr>
 
 function! s:GrepOperator(type)
     let saved_unnamed_register = @@
