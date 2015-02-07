@@ -23,10 +23,11 @@ echo "[+] link created"
 mkdir -p bundle
 echo "[+] bundle dir created"
 
-
-echo "[-] getting vundle"
-git clone https://github.com/gmarik/vundle.git bundle/vundle
-echo "[+] vundle cloned"
+if [ ! -d bundle/vundle ]; then
+    echo "[-] getting vundle"
+    git clone https://github.com/gmarik/vundle.git bundle/vundle
+    echo "[+] vundle cloned"
+fi
 
 echo "[-] installing plugins"
 vim +PluginInstall +qall
