@@ -93,6 +93,7 @@ filetype indent plugin on
 let g:go_disable_autoinstall = 0
 
 " Turn on that syntax highlighting
+set python_highlight_all = 1
 set t_Co=256
 syntax enable
 
