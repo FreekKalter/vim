@@ -74,6 +74,7 @@ Plugin 'fatih/vim-go'
 Plugin 'vivien/vim-addon-linux-coding-style.git'
 Plugin 'FreekKalter/vim-python-folding'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'vim-scripts/indentpython.vim'
 
 " some old stuf, keep it around just in case
 " Plugin 'sjl/badwolf'
@@ -93,7 +94,7 @@ filetype indent plugin on
 let g:go_disable_autoinstall = 0
 
 " Turn on that syntax highlighting
-set python_highlight_all = 1
+let python_highlight_all = 1
 set t_Co=256
 syntax enable
 
